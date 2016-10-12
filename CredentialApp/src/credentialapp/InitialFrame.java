@@ -5,12 +5,18 @@
  */
 package credentialapp;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author ggs5053
  */
-public class LoginModel {
-    private String username; 
-    private String password; 
+public class InitialFrame extends JFrame {
+    LoginView loginScreen;
     
+    public InitialFrame(){
+        
+    super("Credential Application");
+    
+    }
 }

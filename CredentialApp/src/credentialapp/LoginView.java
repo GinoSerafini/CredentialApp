@@ -5,10 +5,18 @@
  */
 package credentialapp;
 
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author ggs5053
  */
-public class LoginView {
+public class LoginView extends JPanel{
+    JTextField usernameTF;
+    JTextField passwordTF;
+    public LoginView(){
+       usernameTF = new JTextField(); 
+    }
     
 }
