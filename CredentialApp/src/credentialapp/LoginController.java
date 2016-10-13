@@ -42,19 +42,7 @@ public class LoginController {
         Connection connection = establishConnection();
         PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM account WHERE username="+this.username+"AND password="+this.password+";");
         ResultSet rs = stmnt.executeQuery();
-        int count = 0;
-        while(rs.next())
-        {
-            count = count + 1;
-        }
-        if(count == 1)
-        {
-            JOptionPane.showMessageDialog(null, "Username and Password are correct.");
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Username and Password are incorrect.");
-        }
+        
         System.out.println(rs.getString(1));
     }
     
