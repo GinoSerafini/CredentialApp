@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  *
  * @author ggs5053
  */
-public class LoginView extends JPanel{
+public class LoginView extends JPanel {
     
     JTextField usernameTF;
     JTextField passwordTF;
@@ -26,7 +26,7 @@ public class LoginView extends JPanel{
     
     public LoginView(){
        
-        super();
+       super();
        
        setBackground(Color.lightGray);// Colors
        
