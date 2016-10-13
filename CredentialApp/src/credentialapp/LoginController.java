@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,9 +40,21 @@ public class LoginController {
     
     protected void authenticateLogin() throws SQLException {
         Connection connection = establishConnection();
-        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM accounts WHERE username="+this.username+"AND password="+this.password+";");
+        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM account WHERE username="+this.username+"AND password="+this.password+";");
         ResultSet rs = stmnt.executeQuery();
-        
+        int count = 0;
+        while(rs.next())
+        {
+            count = count + 1;
+        }
+        if(count == 1)
+        {
+            JOptionPane.showMessageDialog(null, "Username and Password are correct.");
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Username and Password are incorrect.");
+        }
         System.out.println(rs.getString(1));
     }
     
