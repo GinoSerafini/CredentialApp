@@ -77,9 +77,7 @@ public class LoginController  {
     protected Connection establishConnection() throws SQLException {
         Connection connection = null;
         Properties connProps = new Properties();
-        connProps.put("user", "mvc5715");
-        connProps.put("password","ist311");
-        connection = DriverManager.getConnection("jdbc:" + DBMS + "://" +SERVER_NAME +":" + PORT_NUM + "/", connProps);
+        connection = DriverManager.getConnection("jdbc:" + DBMS + "://mysql.up.ist.psu.edu?user=mvc5715&password=ist311&useUnicode=true&characterEncoding=UTF-8");
 
         
         return connection;
