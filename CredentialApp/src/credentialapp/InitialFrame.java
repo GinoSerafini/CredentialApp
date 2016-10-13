@@ -15,8 +15,7 @@ public class InitialFrame extends JFrame {
     LoginView loginScreen;
     
     public InitialFrame(){
-        
-    super("Credential Application");
+        super("Credential Application");
     
     }
 }
