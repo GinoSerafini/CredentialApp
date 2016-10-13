@@ -24,7 +24,7 @@ public class LoginView extends JPanel {
     JButton loginButton;
     JButton signupButton;
     
-    public LoginView(){
+    public LoginView(LoginModel model){
        
        super();
        

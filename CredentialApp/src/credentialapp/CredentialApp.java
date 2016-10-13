@@ -5,6 +5,7 @@
  */
 package credentialapp;
 
+import java.sql.SQLException;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
@@ -14,11 +15,10 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class CredentialApp {
 
   
-   public static void main(String args[])
-  {	
-    InitialFrame initialFrame = new InitialFrame();
-    initialFrame.setVisible(true);
-  }
+    public static void main(String args[]) throws SQLException {	
+        InitialFrame initialFrame = new InitialFrame();
+        initialFrame.setVisible(true);
+    }
     
     
 }

@@ -5,6 +5,7 @@
  */
 package credentialapp;
 
+import java.sql.SQLException;
 import javax.swing.JFrame;
 
 /**
@@ -12,14 +13,18 @@ import javax.swing.JFrame;
  * @author ggs5053
  */
 public class InitialFrame extends JFrame {
-    LoginView loginScreen;
+    LoginView loginView;
+    LoginController loginCont;
+    LoginModel loginModel;
     
-    public InitialFrame(){
+    public InitialFrame() throws SQLException {
         super("Credential Application");
             setDefaultCloseOperation(EXIT_ON_CLOSE);
             setSize (800, 280);
-        loginScreen = new LoginView();
-        add(loginScreen);
+        loginModel = new LoginModel();
+        loginView = new LoginView(loginModel);
+        loginCont = new LoginController(loginModel, loginView);
+        add(loginView);
     
     }
 }

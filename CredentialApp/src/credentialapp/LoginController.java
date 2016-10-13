@@ -5,19 +5,23 @@
  */
 package credentialapp;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author ggs5053
  */
-public class LoginController {
+public class LoginController implements ActionListener {
     private final String SERVER_NAME="mysql.up.ist.psu.edu";
     private final int PORT_NUM=3306;
     private final String DBMS="mysql";
@@ -31,7 +35,8 @@ public class LoginController {
     private LoginView view;
     
     public LoginController(LoginModel model, LoginView view) throws SQLException {
-       
+        view.getLoginButton().addActionListener(this);
+        view.getSignupButton().addActionListener(this);
         authenticateLogin();
     }
     
@@ -59,6 +64,22 @@ public class LoginController {
 
         
         return connection;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==view.getLoginButton()) {
+            System.out.println("IN");
+            this.username = view.getUsernameTF().getText();
+            this.password = view.getPasswordTF().getText();
+            try {
+                authenticateLogin();
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if(e.getSource()==view.getSignupButton()) {
+            ;
+        }
     }
     
    
