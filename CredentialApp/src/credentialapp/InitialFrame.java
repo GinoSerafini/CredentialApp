@@ -19,12 +19,13 @@ public class InitialFrame extends JFrame {
     
     public InitialFrame() throws SQLException {
         super("Credential Application");
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setSize (800, 280);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize (800, 280);
+        
         loginModel = new LoginModel();
         loginView = new LoginView(loginModel);
         loginCont = new LoginController(loginModel, loginView);
+        
         add(loginView);
-    
     }
 }

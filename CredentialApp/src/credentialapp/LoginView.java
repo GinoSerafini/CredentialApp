@@ -17,12 +17,12 @@ import javax.swing.JTextField;
  */
 public class LoginView extends JPanel {
     
-    JTextField usernameTF;
-    JTextField passwordTF;
-    JLabel usernameJL;
-    JLabel passwordJL;
-    JButton loginButton;
-    JButton signupButton;
+    private JTextField usernameTF;
+    private JTextField passwordTF;
+    private JLabel usernameJL;
+    private JLabel passwordJL;
+    private JButton loginButton;
+    private JButton signupButton;
     
     public LoginView(LoginModel model){
        

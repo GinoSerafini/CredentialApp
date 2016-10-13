@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author ggs5053
  */
-public class LoginController implements ActionListener {
+public class LoginController  {
     private final String SERVER_NAME="mysql.up.ist.psu.edu";
     private final int PORT_NUM=3306;
     private final String DBMS="mysql";
@@ -35,8 +35,28 @@ public class LoginController implements ActionListener {
     private LoginView view;
     
     public LoginController(LoginModel model, LoginView view) throws SQLException {
-        view.getLoginButton().addActionListener(this);
-        view.getSignupButton().addActionListener(this);
+        view.getLoginButton().addActionListener(new ActionListener() {
+            @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(e.getSource() == view.getLoginButton()) {
+                        username = view.getUsernameTF().getText();
+                        password = view.getPasswordTF().getText();
+                        try {
+                            authenticateLogin();
+                        } catch (SQLException ex) {
+                            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+        });
+        view.getSignupButton().addActionListener(new ActionListener() {
+            @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(e.getSource() == view.getSignupButton()) {
+                        //nothing yet
+                    }
+                }
+        });
     }
     
     
@@ -64,24 +84,5 @@ public class LoginController implements ActionListener {
         
         return connection;
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        System.out.println(view.loginButton);
-        if(true) {
-            System.out.println("IN");
-            this.username = view.getUsernameTF().getText();
-            this.password = view.getPasswordTF().getText();
-            try {
-                authenticateLogin();
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if(e.getSource()==view.getSignupButton()) {
-            ;
-        }
-    }
-    
    
-    
 }
