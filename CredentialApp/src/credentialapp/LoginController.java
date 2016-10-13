@@ -37,7 +37,6 @@ public class LoginController implements ActionListener {
     public LoginController(LoginModel model, LoginView view) throws SQLException {
         view.getLoginButton().addActionListener(this);
         view.getSignupButton().addActionListener(this);
-        authenticateLogin();
     }
     
     
@@ -68,7 +67,8 @@ public class LoginController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==view.getLoginButton()) {
+        System.out.println(view.loginButton);
+        if(true) {
             System.out.println("IN");
             this.username = view.getUsernameTF().getText();
             this.password = view.getPasswordTF().getText();
