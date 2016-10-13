@@ -27,9 +27,11 @@ public class LoginController {
     private String username;
     private String password;
     
-    public LoginController(String username, String password) throws SQLException {
-        this.username = username;
-        this.password = password;
+    private LoginModel model;
+    private LoginView view;
+    
+    public LoginController(LoginModel model, LoginView view) throws SQLException {
+       
         authenticateLogin();
     }
     
@@ -37,6 +39,8 @@ public class LoginController {
     protected void newUser() {
         
     }
+    
+    
     
     protected void authenticateLogin() throws SQLException {
         Connection connection = establishConnection();
@@ -56,5 +60,7 @@ public class LoginController {
         
         return connection;
     }
+    
+   
     
 }
