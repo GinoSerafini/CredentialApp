@@ -19,7 +19,7 @@ public class LoginView extends JPanel{
     
     JTextField usernameTF;
     JTextField passwordTF;
-    JLabel usernameJL;
+    usernameJL;
     JLabel passwordJL;
     JButton loginButton;
     JButton signupButton;
@@ -46,6 +46,38 @@ public class LoginView extends JPanel{
        add(loginButton);
        add(signupButton);
        
+    }
+
+    public JTextField getUsernameTF() {
+        return usernameTF;
+    }
+
+    public void setUsernameTF(JTextField usernameTF) {
+        this.usernameTF = usernameTF;
+    }
+
+    public JTextField getPasswordTF() {
+        return passwordTF;
+    }
+
+    public void setPasswordTF(JTextField passwordTF) {
+        this.passwordTF = passwordTF;
+    }
+
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+
+    public void setLoginButton(JButton loginButton) {
+        this.loginButton = loginButton;
+    }
+
+    public JButton getSignupButton() {
+        return signupButton;
+    }
+
+    public void setSignupButton(JButton signupButton) {
+        this.signupButton = signupButton;
     }
     
 }
