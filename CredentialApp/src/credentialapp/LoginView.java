@@ -19,7 +19,7 @@ public class LoginView extends JPanel{
     
     JTextField usernameTF;
     JTextField passwordTF;
-    usernameJL;
+    JLabel usernameJL;
     JLabel passwordJL;
     JButton loginButton;
     JButton signupButton;
