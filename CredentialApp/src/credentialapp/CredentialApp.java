@@ -5,17 +5,20 @@
  */
 package credentialapp;
 
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
+
 /**
  *
  * @author ggs5053
  */
 public class CredentialApp {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+  
+   public static void main(String args[])
+  {	
+    InitialFrame initialFrame = new InitialFrame();
+    initialFrame.setVisible(true);
+  }
+    
     
 }

@@ -16,6 +16,10 @@ public class InitialFrame extends JFrame {
     
     public InitialFrame(){
         super("Credential Application");
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setSize (800, 280);
+        loginScreen = new LoginView();
+        add(loginScreen);
     
     }
 }
