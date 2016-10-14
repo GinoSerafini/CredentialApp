@@ -22,6 +22,7 @@ public class InitialFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize (800, 280);
         
+        
         loginModel = new LoginModel();
         loginView = new LoginView(loginModel);
         loginCont = new LoginController(loginModel, loginView);

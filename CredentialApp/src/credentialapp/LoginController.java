@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +69,7 @@ public class LoginController  {
     
     protected void authenticateLogin() throws SQLException {
         Connection connection = establishConnection();
-        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM account WHERE username="+this.username+"AND password="+this.password+";");
+        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM account WHERE username="+this.username+" AND password="+this.password+"");
         ResultSet rs = stmnt.executeQuery();
         
         System.out.println(rs.getString(1));
@@ -76,8 +77,19 @@ public class LoginController  {
     
     protected Connection establishConnection() throws SQLException {
         Connection connection = null;
-        Properties connProps = new Properties();
-        connection = DriverManager.getConnection("jdbc:" + DBMS + "://mysql.up.ist.psu.edu?user=mvc5715&password=ist311&useUnicode=true&characterEncoding=UTF-8");
+        try {//https://my.up.ist.psu.edu/phpmyadmin/db_structure.php?server=1&db=mvc5715&token=61224445d3a074ffa05be37fbe7b46b6
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/APP;create=true;");
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (InstantiationException ex) {   
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         
         return connection;
