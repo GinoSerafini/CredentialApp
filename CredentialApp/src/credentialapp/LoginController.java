@@ -69,27 +69,22 @@ public class LoginController  {
     
     protected void authenticateLogin() throws SQLException {
         Connection connection = establishConnection();
-        PreparedStatement stmnt = connection.prepareStatement("SELECT * FROM account WHERE username="+this.username+" AND password="+this.password+"");
-        ResultSet rs = stmnt.executeQuery();
+        Statement stmnt = connection.createStatement();
+        //System.out.println(connection.isClosed());
+        ResultSet rs = stmnt.executeQuery("SELECT * FROM ACCOUNT WHERE username='"+this.username+"' AND password='"+this.password+"'");
         
-        System.out.println(rs.getString(1));
     }
     
     protected Connection establishConnection() throws SQLException {
         Connection connection = null;
         try {//https://my.up.ist.psu.edu/phpmyadmin/db_structure.php?server=1&db=mvc5715&token=61224445d3a074ffa05be37fbe7b46b6
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/APP;create=true;");
-            
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/IST311/APP;");
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (InstantiationException ex) {   
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
 
         
         return connection;

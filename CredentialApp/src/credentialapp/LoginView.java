@@ -33,8 +33,8 @@ public class LoginView extends JPanel {
        usernameJL = new JLabel("Username: "); // Labels
        passwordJL = new JLabel("Password: ");
        
-       usernameTF = new JTextField(" Enter your username! "); // Textfields 
-       passwordTF = new JTextField(" Enter your password! ");
+       usernameTF = new JTextField(12); // Textfields 
+       passwordTF = new JTextField(12);
        
        loginButton = new JButton("Login"); // Buttons
        signupButton = new JButton("Sign Up!");
