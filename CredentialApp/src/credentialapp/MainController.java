@@ -8,6 +8,9 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,6 +49,7 @@ public class MainController {
         StringSelection str = new StringSelection(model.getGenPassword());
         Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
         c.setContents(str, null);
+
     }
     
     private void preparePasswordLength() {
