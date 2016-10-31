@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author ggs5053
+ * @author Group 5
  */
 public class InitialFrame extends JFrame {
     LoginView loginView;
@@ -29,5 +29,6 @@ public class InitialFrame extends JFrame {
         loginCont = new LoginController(loginModel, loginView);
         
         add(loginView);
+        
     }
 }

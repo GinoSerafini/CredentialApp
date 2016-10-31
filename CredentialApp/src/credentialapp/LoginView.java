@@ -9,6 +9,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -17,10 +18,11 @@ import javax.swing.JTextField;
  */
 public class LoginView extends JPanel {
     
-    private JTextField usernameTF;
-    private JTextField passwordTF;
-    private JLabel usernameJL;
-    private JLabel passwordJL;
+    private JTextField usernameField;
+    private JPasswordField passwordField;
+    private JLabel usernameLabel;
+    private JLabel passwordLabel;
+    private JLabel outputLabel;
     private JButton loginButton;
     private JButton signupButton;
     
@@ -30,38 +32,41 @@ public class LoginView extends JPanel {
        
        setBackground(Color.lightGray);// Colors
        
-       usernameJL = new JLabel("Username: "); // Labels
-       passwordJL = new JLabel("Password: ");
+       usernameLabel = new JLabel("Username:"); // Labels
+       passwordLabel = new JLabel("Password:");
+       outputLabel = new JLabel();
+       outputLabel.setForeground(Color.red);
        
-       usernameTF = new JTextField(12); // Textfields 
-       passwordTF = new JTextField(12);
+       usernameField = new JTextField(12); // Textfields 
+       passwordField = new JPasswordField(12);
        
        loginButton = new JButton("Login"); // Buttons
        signupButton = new JButton("Sign Up!");
        
-       add(usernameJL); //adding items to panel
-       add(usernameTF);
-       add(passwordJL);
-       add(passwordTF);
+       add(usernameLabel); //adding items to panel
+       add(usernameField);
+       add(passwordLabel);
+       add(passwordField);
        add(loginButton);
        add(signupButton);
+       add(outputLabel);
        
     }
 
-    public JTextField getUsernameTF() {
-        return usernameTF;
+    public JTextField getUsernameField() {
+        return usernameField;
     }
 
-    public void setUsernameTF(JTextField usernameTF) {
-        this.usernameTF = usernameTF;
+    public void setUsernameField(JTextField usernameField) {
+        this.usernameField = usernameField;
     }
 
-    public JTextField getPasswordTF() {
-        return passwordTF;
+    public JTextField getPasswordField() {
+        return passwordField;
     }
 
-    public void setPasswordTF(JTextField passwordTF) {
-        this.passwordTF = passwordTF;
+    public void setPasswordField(JPasswordField passwordField) {
+        this.passwordField = passwordField;
     }
 
     public JButton getLoginButton() {
@@ -80,4 +85,12 @@ public class LoginView extends JPanel {
         this.signupButton = signupButton;
     }
     
+    public JLabel getOutputLabel() {
+        return outputLabel;
+    }
+    
+    public void setOutputLabel(JLabel outputLabel) {
+        this.outputLabel = outputLabel;
+    }
+            
 }

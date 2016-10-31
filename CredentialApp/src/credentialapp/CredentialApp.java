@@ -6,11 +6,10 @@
 package credentialapp;
 
 import java.sql.SQLException;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 /**
  *
- * @author ggs5053
+ * @author Group 5
  */
 public class CredentialApp {
 
