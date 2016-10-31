@@ -14,7 +14,6 @@ public class MainView extends JPanel {
     private JCheckBox numberBox;
     private JButton generatePasswordButton;
     private JLabel passwordLabel;
-    private JLabel clipboardLabel;
     
     public MainView(MainModel model) {
         super();
@@ -25,7 +24,6 @@ public class MainView extends JPanel {
         numberBox = new JCheckBox("Must Include Numbers");
         
         passwordLabel = new JLabel("");
-        clipboardLabel = new JLabel("Password has been copied to clipboard!");
         
         generatePasswordButton = new JButton("Generate Password");
         
@@ -34,7 +32,6 @@ public class MainView extends JPanel {
         add(numberBox);
         add(generatePasswordButton);
         add(passwordLabel);
-        add(clipboardLabel);
     }
     
     public JButton getGeneratePasswordButton() {
@@ -57,11 +54,5 @@ public class MainView extends JPanel {
         return numberBox;
     }
 
-    public JLabel getClipboardLabel() {
-        return clipboardLabel;
-    }
-    
-    
-    
     
 }
