@@ -9,8 +9,10 @@ public class MainModel {
     private boolean eightCharacterMinimum;
     private boolean includeCapitalLetter;
     private boolean includeNumber;
+    private boolean includeCharacters;
     private int genPasswordLength;
     private String genPassword;
+    
     private final String ANUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\\\|;:\\'\\\",<.>/?\n";
     public MainModel() {
         eightCharacterMinimum = false;
@@ -38,6 +40,14 @@ public class MainModel {
         return includeNumber;
     }
 
+    public boolean isIncludeCharacters() {
+        return includeCharacters;
+    }
+    
+    public void setIncludeCharacters(boolean includeCharacters) {
+        this.includeCharacters = includeCharacters;
+    }
+    
     public void setEightCharacterMinimum(boolean eightCharacterMinimum) {
         this.eightCharacterMinimum = eightCharacterMinimum;
     }
