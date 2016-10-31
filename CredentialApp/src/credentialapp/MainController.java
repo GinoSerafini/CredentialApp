@@ -30,6 +30,7 @@ public class MainController {
                 model.setEightCharacterMinimum(view.getEightBox().isSelected());
                 model.setIncludeCapitalLetter(view.getCapitalBox().isSelected());
                 model.setIncludeNumber(view.getNumberBox().isSelected());
+                model.setIncludeCharacters(view.getCharBox().isSelected());
                 generatePassword();
             }
         });

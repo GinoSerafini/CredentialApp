@@ -12,6 +12,7 @@ public class MainView extends JPanel {
     private JCheckBox eightBox;
     private JCheckBox capitalBox;
     private JCheckBox numberBox;
+    private JCheckBox charBox;
     private JButton generatePasswordButton;
     private JLabel passwordLabel;
     
@@ -22,6 +23,7 @@ public class MainView extends JPanel {
         eightBox = new JCheckBox("Eight Character Minimum");
         capitalBox = new JCheckBox("Must Include Capital Letters");
         numberBox = new JCheckBox("Must Include Numbers");
+        charBox = new JCheckBox("Must Include Characters");
         
         passwordLabel = new JLabel("");
         
@@ -54,5 +56,8 @@ public class MainView extends JPanel {
         return numberBox;
     }
 
+    public JCheckBox getCharBox() {
+        return charBox;
+    }
     
 }
