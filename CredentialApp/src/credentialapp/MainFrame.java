@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
         super("Credential Application");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize (200, 200);
+        setSize (250, 200);
         
         
         mainModel = new MainModel();

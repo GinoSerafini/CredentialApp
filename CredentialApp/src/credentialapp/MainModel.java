@@ -13,7 +13,11 @@ public class MainModel {
     private int genPasswordLength;
     private String genPassword;
     
-    private final String ANUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789~`!@#$%^&*()-_=+[{]}\\\\|;:\\'\\\",<.>/?\n";
+    private final String ALPHA = "abcdefghijklmnopqrstuvwxyz";
+    private final String CAPALPHA = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final String CHARALPHA = "~`!@#$%^&*()-_=+[{]}\\\\|;:\\'\\\",<.>/?";
+    private final String NUMALPHA = "0123456789";
+    
     public MainModel() {
         eightCharacterMinimum = false;
         includeCapitalLetter= false;
@@ -68,10 +72,21 @@ public class MainModel {
         this.genPassword = genPassword;
     }
 
-    public String getANUM() {
-        return ANUM;
+    public String getALPHA() {
+        return ALPHA;
     }
     
+    public String getCapAlpha() {
+        return CAPALPHA;
+    }
+    
+    public String getCharAlpha() {
+        return CHARALPHA;
+    }
+    
+    public String getNumAlpha() {
+        return NUMALPHA;
+    }
     
     
     

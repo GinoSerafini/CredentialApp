@@ -14,6 +14,7 @@ public class MainView extends JPanel {
     private JCheckBox numberBox;
     private JCheckBox charBox;
     private JButton generatePasswordButton;
+    private JButton backButton;
     private JLabel passwordLabel;
     
     public MainView(MainModel model) {
@@ -28,10 +29,13 @@ public class MainView extends JPanel {
         passwordLabel = new JLabel("");
         
         generatePasswordButton = new JButton("Generate Password");
+        backButton = new JButton("<--");
         
         add(eightBox);
         add(capitalBox);
         add(numberBox);
+        add(charBox);
+        add(backButton);
         add(generatePasswordButton);
         add(passwordLabel);
     }
@@ -60,4 +64,7 @@ public class MainView extends JPanel {
         return charBox;
     }
     
+    public JButton getBackButton() {
+        return backButton;
+    }
 }
