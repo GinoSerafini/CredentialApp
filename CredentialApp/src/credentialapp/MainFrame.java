@@ -17,7 +17,7 @@ public class MainFrame extends JFrame {
         super("Credential Application");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize (250, 200);
+        setSize (250, 300);
         
         
         mainModel = new MainModel();
@@ -26,4 +26,10 @@ public class MainFrame extends JFrame {
         
         add(mainView);
     }
+
+    public MainView getMainView() {
+        return mainView;
+    }
+    
+    
 }

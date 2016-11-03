@@ -22,6 +22,7 @@ public class InitialFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize (200, 200);
+        setResizable(false);
         
         
         loginModel = new LoginModel();

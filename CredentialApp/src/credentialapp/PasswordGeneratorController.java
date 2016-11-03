@@ -31,13 +31,6 @@ public class PasswordGeneratorController {
             }
         });
         
-        view.getBackButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //nothing yet
-                //will return to main menu
-            }
-        });
         
     }
     
@@ -50,12 +43,12 @@ public class PasswordGeneratorController {
         int numChars = 0; //number of special characters that will be in the string
         int remLength = 0; //the remaining length that will be
         
-        char[] capLoc = new char[model.getGenPasswordLength()];
-        char[] numLoc = new char[model.getGenPasswordLength()];
-        char[] charLoc = new char[model.getGenPasswordLength()];
+        char[] capLoc = new char[model.getGenPasswordLength()]; //parallel array for the location of capital letters
+        char[] numLoc = new char[model.getGenPasswordLength()];//parallel array for the location of numbers
+        char[] charLoc = new char[model.getGenPasswordLength()];//parallel array for the location of special characters
         
-        if(model.isIncludeCapitalLetter()) {
-            numCaps = calcRemainingRandChars(remLength);
+        if(model.isIncludeCapitalLetter()) { // if the password must include a captial letter
+            numCaps = calcRemainingRandChars(remLength); 
             remLength-=numCaps;
             for(int i=0; i<numCaps; i++) {
                 int loc = getRandomNumber(0,model.getGenPasswordLength()-1);
@@ -67,7 +60,7 @@ public class PasswordGeneratorController {
                 }
             }
         }
-        if(model.isIncludeNumber()) {
+        if(model.isIncludeNumber()) {// if the password must include a number
             numNums = calcRemainingRandChars(remLength);
             remLength +=numNums;
             for(int i=0; i<numNums; i++) {
@@ -80,7 +73,7 @@ public class PasswordGeneratorController {
                 }
             }
         }
-        if(model.isIncludeCharacters()) {
+        if(model.isIncludeCharacters()) { // if the password must include a special character
             numChars = calcRemainingRandChars(remLength);
             remLength+=numChars;
             for(int i=0; i<numChars; i++) {

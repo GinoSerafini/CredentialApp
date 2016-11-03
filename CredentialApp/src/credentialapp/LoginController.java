@@ -42,6 +42,7 @@ public class LoginController  {
                             if(authenticateLogin()) {
 
                                 MainFrame m = new MainFrame();
+                                m.getMainView().getProfileModel().setUsername(model.getUsername());
                                 m.setVisible(true);
                                 SwingUtilities.getWindowAncestor(view).dispose();
                                 
@@ -67,9 +68,9 @@ public class LoginController  {
     protected void newUser() {
         NewUserModel newUserModel= new NewUserModel();
         NewUserView newUserView = new NewUserView(newUserModel);
-        NewUserController newUserController = new NewUserController(newUserModel, newUserView);
+        NewUserController newUserController = new NewUserController(newUserModel, newUserView, view);
         view.getParent().add(newUserView);
-        SwingUtilities.getWindowAncestor(view).setSize(220,310);
+        SwingUtilities.getWindowAncestor(view).setSize(390,330);
         view.setVisible(false);
         newUserView.setVisible(true);
         view.getParent().repaint();

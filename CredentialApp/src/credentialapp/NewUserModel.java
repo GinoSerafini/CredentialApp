@@ -10,8 +10,8 @@ public class NewUserModel {
     private String lastName;
     private String email;
     private String username;
-    private char[] password;
-    private char[] confirmPassword;
+    private String password;
+    private String confirmPassword;
     private String securityQuestion;
     private String securityAnswer;
     public NewUserModel() {
@@ -39,10 +39,10 @@ public class NewUserModel {
         return username;
     }
 
-    public char[] getPassword() {
+    public String getPassword() {
         return password;
     }
-    public char[] getConfirmPassword() {
+    public String getConfirmPassword() {
         return confirmPassword;
     }
 
@@ -70,11 +70,11 @@ public class NewUserModel {
         this.username = username;
     }
 
-    public void setPassword(char[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
     
-    public void setConfirmPassword(char[] confirmPassword) {
+    public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
     

@@ -8,16 +8,15 @@ import javax.swing.*;
  * @author Michael Cavallaro
  */
 public class PasswordGeneratorView extends JPanel {
-    private MainModel model;
+    private PasswordGeneratorModel model;
     private JCheckBox eightBox;
     private JCheckBox capitalBox;
     private JCheckBox numberBox;
     private JCheckBox charBox;
     private JButton generatePasswordButton;
-    private JButton backButton;
     private JLabel passwordLabel;
     
-    public PasswordGeneratorView(MainModel model) {
+    public PasswordGeneratorView(PasswordGeneratorModel model) {
         super();
         this.model = model;
         
@@ -29,13 +28,11 @@ public class PasswordGeneratorView extends JPanel {
         passwordLabel = new JLabel("");
         
         generatePasswordButton = new JButton("Generate Password");
-        backButton = new JButton("<--");
         
         add(eightBox);
         add(capitalBox);
         add(numberBox);
         add(charBox);
-        add(backButton);
         add(generatePasswordButton);
         add(passwordLabel);
     }
@@ -62,9 +59,5 @@ public class PasswordGeneratorView extends JPanel {
 
     public JCheckBox getCharBox() {
         return charBox;
-    }
-    
-    public JButton getBackButton() {
-        return backButton;
     }
 }

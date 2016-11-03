@@ -43,7 +43,7 @@ public class NewUserView extends JPanel {
 	((GridBagLayout)getLayout()).columnWeights = new double[] {0.0, 0.0, .0001};
 	((GridBagLayout)getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, .0001};
         
-                newUserLabel = new JLabel("New User");
+        newUserLabel = new JLabel("New User");
         firstNameLabel = new JLabel("First Name:");
         lastNameLabel = new JLabel("Last Name:");
         emailLabel = new JLabel("Email");
@@ -61,7 +61,8 @@ public class NewUserView extends JPanel {
         passwordField = new JPasswordField(8);
         confirmField = new JPasswordField(8);
         securityAnswerField = new JTextField(8);
-        securityQuestionBox = new JComboBox();
+        String[] questionString = {"What is your pet’s name?","In what year was your father born?","What is your favorite food?"};
+        securityQuestionBox = new JComboBox(questionString);
         registerButton = new JButton("Register");
         backButton = new JButton("<--");
         //Set up layout
@@ -114,7 +115,9 @@ public class NewUserView extends JPanel {
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 5, 5), 0, 0));
 	add(registerButton, new GridBagConstraints(1, 8, 1, 1, 0.0, 0.0,
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH,new Insets(0, 0, 5, 0), 0, 0));
-
+        
+        add(outputLabel, new GridBagConstraints(0, 9, 2, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0,0,5,5),0,0));
     }
 
     public JTextField getFirstNameField() {
@@ -156,4 +159,43 @@ public class NewUserView extends JPanel {
     public JButton getBackButton() {
         return backButton;
     }
+
+    public JLabel getFirstNameLabel() {
+        return firstNameLabel;
+    }
+
+    public JLabel getLastNameLabel() {
+        return lastNameLabel;
+    }
+
+    public JLabel getEmailLabel() {
+        return emailLabel;
+    }
+
+    public JLabel getUsernameLabel() {
+        return usernameLabel;
+    }
+
+    public JLabel getPasswordLabel() {
+        return passwordLabel;
+    }
+
+    public JLabel getConfirmLabel() {
+        return confirmLabel;
+    }
+
+    public JLabel getSecurityAnswerLabel() {
+        return securityAnswerLabel;
+    }
+
+    public JLabel getSecurityQuestionLabel() {
+        return securityQuestionLabel;
+    }
+
+    public JLabel getOutputLabel() {
+        return outputLabel;
+    }
+    
+    
+    
 }
