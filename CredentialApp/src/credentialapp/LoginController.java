@@ -19,84 +19,94 @@ import javax.swing.SwingUtilities;
 
 /**
  *
- * @author ggs5053
+ * @author Group 5
  */
 public class LoginController  {
-    private final String SERVER="jdbc:derby://localhost:1527/IST311";
-    private final String DB_USERNAME="ist311";
-    private final String DB_PASSWORD="ist311";
+    private final String SERVER="jdbc:derby://localhost:1527/IST311"; //predefined URL 
+    private final String DB_USERNAME="ist311";//username for the DB
+    private final String DB_PASSWORD="ist311";//pass for the Db
     
-    private LoginModel model;
-    private LoginView view;
+    private LoginModel model; //model for the lgin
+    private LoginView view; //model for the view
     
     public LoginController(LoginModel model, LoginView view) throws SQLException {
         this.view = view;
         this.model = model;
         view.getLoginButton().addActionListener(new ActionListener() {
             @Override
-                public void actionPerformed(ActionEvent e) {
-                    if(e.getSource() == view.getLoginButton()) {
-                        model.setUsername(view.getUsernameField().getText());
-                        model.setPassword(view.getPasswordField().getText());
-                        try {
-                            if(authenticateLogin()) {
-
-                                MainFrame m = new MainFrame();
-                                m.getMainView().getProfileModel().setUsername(model.getUsername());
-                                m.setVisible(true);
-                                SwingUtilities.getWindowAncestor(view).dispose();
+            public void actionPerformed(ActionEvent e) {
+                    
+                model.setUsername(view.getUsernameField().getText()); //get the username from the view
+                model.setPassword(view.getPasswordField().getText()); //get the password from the view
+                try {
+                    if(authenticateLogin()) { //try authenticationg
+                        MainFrame m = new MainFrame(); //new frame for the main portion of the program
+                        m.getMainView().getProfileController().establishConnection(); 
+                        m.getMainView().getProfileModel().setUsername(model.getUsername());
+                        m.setVisible(true);//set the new fram to visible
+                        SwingUtilities.getWindowAncestor(view).dispose(); //get ride of the first frame
                                 
-                            }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
                     }
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
         });
         view.getSignupButton().addActionListener(new ActionListener() {
             @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(e.getSource() == view.getSignupButton()) {
-                        newUser();
-             
-                    }
+                    newUser(); 
                 }
         });
     }
     
     
+    /**
+     * Creates a new user panel
+     */
     protected void newUser() {
-        NewUserModel newUserModel= new NewUserModel();
-        NewUserView newUserView = new NewUserView(newUserModel);
-        NewUserController newUserController = new NewUserController(newUserModel, newUserView, view);
-        view.getParent().add(newUserView);
-        SwingUtilities.getWindowAncestor(view).setSize(390,330);
-        view.setVisible(false);
-        newUserView.setVisible(true);
-        view.getParent().repaint();
+        NewUserModel newUserModel= new NewUserModel(); //model for the new user
+        NewUserView newUserView = new NewUserView(newUserModel); //view for the new suer
+        NewUserController newUserController = new NewUserController(newUserModel, newUserView, view); //controller for the new user
+        view.getParent().add(newUserView);//add the new user view to parent frame
+        SwingUtilities.getWindowAncestor(view).setSize(390,330);//reset the frame size
+        view.setVisible(false); //set the login panel to hidden
+        newUserView.setVisible(true); //set the new user panel to visible
+        view.getParent().repaint(); //repaint the frame
     }
     
     
-    
+    /**
+     * Authenticate the user
+     * @return true if the user has been
+     * @throws SQLException 
+     */
     protected boolean authenticateLogin() throws SQLException {
-        Connection connection = establishConnection();
+        Connection connection = establishConnection(); //establish connection
+        //allow for data to be read from the result set
         Statement stmnt = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         //System.out.println(connection.isClosed());
         ResultSet rs = stmnt.executeQuery("SELECT * FROM ACCOUNT WHERE username='"+model.getUsername()+"' AND password='"+model.getPassword()+"'");
-        if(!rs.isBeforeFirst()) {
+        if(!rs.isBeforeFirst()) { //if the username and password werent matched
             view.getOutputLabel().setText("Invalid Username/Password");
-            return false;
+            return false; //return false authentication
         } else {
             System.out.println("User authenticated.");
-            connection.close();
+            connection.close(); //close connection
             return true;
         }
     }
     
+    /**
+     * Establish a connection with DB
+     * @return the valid connection
+     * @throws SQLException 
+     */
     protected Connection establishConnection() throws SQLException {
         Connection connection = null;
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance(); //new client driver
+            //connect to database
             connection = DriverManager.getConnection(SERVER+";user="+DB_USERNAME+";password="+DB_PASSWORD);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -109,7 +119,7 @@ public class LoginController  {
         }
 
         
-        return connection;
+        return connection; //return the valid connection
     }
    
 }

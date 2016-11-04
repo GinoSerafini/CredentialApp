@@ -1,6 +1,8 @@
 
 package credentialapp;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Michael Cavallaro
@@ -10,6 +12,7 @@ public class ProfileModel {
     private String lastName;
     private String email;
     private String username;
+    //private ArrayList<Credential> credentialList;
     
     public ProfileModel() {
         

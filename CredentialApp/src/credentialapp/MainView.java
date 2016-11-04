@@ -20,7 +20,9 @@ public class MainView extends JTabbedPane {
         super();
         this.model = model;
         
-        profileView = new ProfileView();
+        profileModel = new ProfileModel();
+        profileView = new ProfileView(profileModel);
+        profileController = new ProfileController(profileModel, profileView);
         
         passwordGeneratorModel = new PasswordGeneratorModel();
         passwordGeneratorView = new PasswordGeneratorView(passwordGeneratorModel);
@@ -34,5 +36,7 @@ public class MainView extends JTabbedPane {
         return profileModel;
     }
     
-    
+    public ProfileController getProfileController() {
+        return profileController;
+    }
 }

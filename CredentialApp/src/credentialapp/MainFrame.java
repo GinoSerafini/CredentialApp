@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Michael Cavallaro
+ * @author Group 5
  */
 public class MainFrame extends JFrame {
     MainView mainView;

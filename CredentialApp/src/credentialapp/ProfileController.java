@@ -1,6 +1,8 @@
 
 package credentialapp;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,6 +25,12 @@ public class ProfileController {
         this.model = model;
         this.view = view;
         
+        view.getAddCredentialButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
     }
     
     protected Connection establishConnection() throws SQLException {
@@ -31,7 +39,13 @@ public class ProfileController {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
             connection = DriverManager.getConnection(SERVER+";user="+DB_USERNAME+";password="+DB_PASSWORD);
             ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM ACCOUNT WHERE username="+model.getUsername());
-            
+            while(rs.next()) {
+                model.setFirstName(rs.getString("FIRST_NAME"));
+                model.setLastName(rs.getString("LAST_NAME"));
+                model.setEmail(rs.getString("EMAIL"));
+            }
+            view.getNameLabel().setText(model.getFirstName()+" "+model.getLastName());
+            view.getEmailLabel().setText(model.getEmail());
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

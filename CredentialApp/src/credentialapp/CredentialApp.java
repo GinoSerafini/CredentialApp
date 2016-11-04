@@ -12,11 +12,9 @@ import java.sql.SQLException;
  * @author Group 5
  */
 public class CredentialApp {
-
-  
     public static void main(String args[]) throws SQLException {	
-        InitialFrame initialFrame = new InitialFrame();
-        initialFrame.setVisible(true);
+        InitialFrame initialFrame = new InitialFrame(); //Intiial Frame for the application
+        initialFrame.setVisible(true);//make the frame visible
     }
     
     

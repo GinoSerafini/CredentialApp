@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author ggs5053
+ * @author Group 5
  */
 public class LoginView extends JPanel {
     
@@ -53,44 +53,45 @@ public class LoginView extends JPanel {
        
     }
 
+    /**
+     * Get the Username Field Object
+     * @return 
+     */
     public JTextField getUsernameField() {
         return usernameField;
     }
 
-    public void setUsernameField(JTextField usernameField) {
-        this.usernameField = usernameField;
-    }
-
+    /**
+     * Get the Password Field Object
+     * @return 
+     */
     public JTextField getPasswordField() {
         return passwordField;
     }
 
-    public void setPasswordField(JPasswordField passwordField) {
-        this.passwordField = passwordField;
-    }
-
+    /**
+     * Get the login button object
+     * @return 
+     */
     public JButton getLoginButton() {
         return loginButton;
     }
 
-    public void setLoginButton(JButton loginButton) {
-        this.loginButton = loginButton;
-    }
-
+    /**
+     * Get the signup button object
+     * @return 
+     */
     public JButton getSignupButton() {
         return signupButton;
     }
 
-    public void setSignupButton(JButton signupButton) {
-        this.signupButton = signupButton;
-    }
-    
+    /**
+     * Get the outputlabel object
+     * @return 
+     */
     public JLabel getOutputLabel() {
         return outputLabel;
     }
-    
-    public void setOutputLabel(JLabel outputLabel) {
-        this.outputLabel = outputLabel;
-    }
+   
             
 }
