@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -28,7 +29,12 @@ public class ProfileController {
         view.getAddCredentialButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                NewCredentialModel newCredentialModel = new NewCredentialModel(); //model for the new user
+                NewCredentialView newCredentialView = new NewCredentialView(newCredentialModel); //view for the new suer
+                NewCredentialController newUserController = new NewCredentialController(newCredentialModel, newCredentialView, (MainView)view.getParent()); //controller for the new user
+                view.getParent().getParent().add(newCredentialView);//add the new user view to parent frame
+                SwingUtilities.getWindowAncestor(view).setSize(320,400);//reset the frame size
+                view.getParent().setVisible(false); //set the login panel to hidden
             }
         });
     }

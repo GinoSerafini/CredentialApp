@@ -18,7 +18,7 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize (250, 300);
-        
+        setResizable(false);
         
         mainModel = new MainModel();
         mainView = new MainView(mainModel);
