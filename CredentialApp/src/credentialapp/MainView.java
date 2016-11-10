@@ -38,6 +38,7 @@ public class MainView extends JTabbedPane {
         this.addTab("Profile", profileView);
         this.addTab("Generate Password", passwordGeneratorView);
         this.addTab("Credentials", credView);
+        
     }
 
     public ProfileModel getProfileModel() {

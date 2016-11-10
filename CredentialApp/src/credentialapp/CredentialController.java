@@ -1,6 +1,7 @@
 
 package credentialapp;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,7 +23,11 @@ public class CredentialController {
 
         for(int i=0; i<model.getCredentialList().size();i++) {
             JPanel p = createCredentialPanel(i);
+            p.setPreferredSize(new Dimension(200,100));
+            p.setVisible(true);
+            System.out.println("ADDED");
             view.add(p);
+            
         }
     }
     
