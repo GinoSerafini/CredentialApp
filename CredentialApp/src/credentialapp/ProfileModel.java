@@ -12,12 +12,18 @@ public class ProfileModel {
     private String lastName;
     private String email;
     private String username;
-    //private ArrayList<Credential> credentialList;
+    private ArrayList<Credential> credentialList;
     
     public ProfileModel(String username) {
         this.username=username;
+        credentialList = new ArrayList<Credential>();
     }
 
+    public ArrayList<Credential> getCredentialList() {
+        return credentialList;
+    }
+
+    
     public String getFirstName() {
         return firstName;
     }

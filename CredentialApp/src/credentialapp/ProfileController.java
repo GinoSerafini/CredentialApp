@@ -22,7 +22,7 @@ public class ProfileController {
     public ProfileController(ProfileModel model, ProfileView view) {
         this.model = model;
         this.view = view;
-        
+        loadCredentials();
         view.getAddCredentialButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,4 +63,27 @@ public class ProfileController {
         return connection;
     }
    
+    
+    private void loadCredentials() {
+        Connection connection = null;
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            connection = DriverManager.getConnection(DatabaseConstants.SERVER+";user="+DatabaseConstants.DB_USERNAME+";password="+DatabaseConstants.DB_PASSWORD);
+            ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM CREDENTIAL WHERE id=(SELECT ACCOUNT.ID FROM ACCOUNT WHERE ACCOUNT.username='"+model.getUsername()+"')");
+            while(rs.next()) {
+                Credential c = new Credential(rs.getString("TITLE"),rs.getString("DESCRIPTION"),rs.getString("WEBSITE"),rs.getString("EMAIL"),rs.getString("USERNAME"),rs.getString("PASSWORD"),rs.getString("SECURITY_QUESTION_1"),rs.getString("SECURITY_QUESTION_2"),rs.getString("SECURITY_QUESTION_3"),rs.getString("SECURITY_ANSWER_1"),rs.getString("SECURITY_ANSWER_2"),rs.getString("SECURITY_ANSWER_3"));
+                model.getCredentialList().add(c);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) { 
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

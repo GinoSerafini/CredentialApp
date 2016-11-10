@@ -5,13 +5,16 @@ import javax.swing.*;
 
 /**
  *
- * @author Michael Cavallaro
+ * @author Group 5
  */
 public class MainView extends JTabbedPane {
     private MainModel model;
     private ProfileView profileView;
     private ProfileModel profileModel;
     private ProfileController profileController;
+    private CredentialModel credModel;
+    private CredentialView credView;
+    private CredentialController credController;
     private PasswordGeneratorView passwordGeneratorView;
     private PasswordGeneratorModel passwordGeneratorModel;
     private PasswordGeneratorController passwordGeneratorController;
@@ -28,8 +31,13 @@ public class MainView extends JTabbedPane {
         passwordGeneratorView = new PasswordGeneratorView(passwordGeneratorModel);
         passwordGeneratorController = new PasswordGeneratorController(passwordGeneratorModel, passwordGeneratorView);
        
+        credModel = new CredentialModel(profileModel);
+        credView = new CredentialView(credModel);
+        credController = new CredentialController(credModel, credView);
+        
         this.addTab("Profile", profileView);
         this.addTab("Generate Password", passwordGeneratorView);
+        this.addTab("Credentials", credView);
     }
 
     public ProfileModel getProfileModel() {
