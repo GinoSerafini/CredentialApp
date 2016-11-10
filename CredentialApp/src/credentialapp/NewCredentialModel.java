@@ -7,8 +7,9 @@ package credentialapp;
  */
 public class NewCredentialModel {
     private String title, description, website,email, username,password,confirm,securityQuestion1,securityQuestion2,securityQuestion3,securityAnswer1,securityAnswer2,securityAnswer3;
-
-    public NewCredentialModel() {
+    private ProfileModel model;
+    
+    public NewCredentialModel(ProfileModel model) {
         title="";
         description="";
         website="";
@@ -21,6 +22,7 @@ public class NewCredentialModel {
         securityAnswer1="";
         securityAnswer2="";
         securityAnswer3="";
+        this.model = model;
     }
 
     public String getTitle() {
@@ -127,6 +129,8 @@ public class NewCredentialModel {
         this.securityAnswer3 = securityAnswer3;
     }
     
-    
+    public ProfileModel getProfileModel() {
+        return model;
+    }
     
 }

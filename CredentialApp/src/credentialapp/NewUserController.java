@@ -19,10 +19,6 @@ import javax.swing.SwingUtilities;
  * @author Group 5
  */
 public class NewUserController {
-    private final String SERVER="jdbc:derby://localhost:1527/IST311";
-    private final String DB_USERNAME="ist311";
-    private final String DB_PASSWORD="ist311";
-    
     private NewUserModel model;
     private NewUserView view;
     private LoginView loginView;
@@ -46,7 +42,7 @@ public class NewUserController {
                 if(e.getSource()==view.getBackButton()) {
                     view.setVisible(false);
                     loginView.setVisible(true);
-                    SwingUtilities.getWindowAncestor(view).setSize(200,200);
+                    SwingUtilities.getWindowAncestor(view).setSize(250,300);
                 }
             
             }
@@ -147,9 +143,9 @@ public class NewUserController {
     
     protected Connection establishConnection() throws SQLException {
         Connection connection = null;
-        try {//https://my.up.ist.psu.edu/phpmyadmin/db_structure.php?server=1&db=mvc5715&token=61224445d3a074ffa05be37fbe7b46b6
+        try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            connection = DriverManager.getConnection(SERVER+";user="+DB_USERNAME+";password="+DB_PASSWORD);
+            connection = DriverManager.getConnection(DatabaseConstants.SERVER+";user="+DatabaseConstants.DB_USERNAME+";password="+DatabaseConstants.DB_PASSWORD);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

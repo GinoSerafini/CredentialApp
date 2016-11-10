@@ -14,8 +14,8 @@ public class ProfileModel {
     private String username;
     //private ArrayList<Credential> credentialList;
     
-    public ProfileModel() {
-        
+    public ProfileModel(String username) {
+        this.username=username;
     }
 
     public String getFirstName() {

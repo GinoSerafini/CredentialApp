@@ -1,7 +1,6 @@
 
 package credentialapp;
 
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -9,7 +8,7 @@ import javax.swing.*;
 
 /**
  *
- * @author Group 5s
+ * @author Group 5
  */
 public class NewUserView extends JPanel {
     private NewUserModel model;

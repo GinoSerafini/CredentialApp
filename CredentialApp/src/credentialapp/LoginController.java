@@ -22,10 +22,6 @@ import javax.swing.SwingUtilities;
  * @author Group 5
  */
 public class LoginController  {
-    private final String SERVER="jdbc:derby://localhost:1527/IST311"; //predefined URL 
-    private final String DB_USERNAME="ist311";//username for the DB
-    private final String DB_PASSWORD="ist311";//pass for the Db
-    
     private LoginModel model; //model for the lgin
     private LoginView view; //model for the view
     
@@ -40,7 +36,7 @@ public class LoginController  {
                 model.setPassword(view.getPasswordField().getText()); //get the password from the view
                 try {
                     if(authenticateLogin()) { //try authenticationg
-                        MainFrame m = new MainFrame(); //new frame for the main portion of the program
+                        MainFrame m = new MainFrame(model.getUsername()); //new frame for the main portion of the program
                         m.getMainView().getProfileController().establishConnection(); 
                         m.getMainView().getProfileModel().setUsername(model.getUsername());
                         m.setVisible(true);//set the new fram to visible
@@ -107,7 +103,7 @@ public class LoginController  {
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance(); //new client driver
             //connect to database
-            connection = DriverManager.getConnection(SERVER+";user="+DB_USERNAME+";password="+DB_PASSWORD);
+            connection = DriverManager.getConnection(DatabaseConstants.SERVER+";user="+DatabaseConstants.DB_USERNAME+";password="+DatabaseConstants.DB_PASSWORD);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {

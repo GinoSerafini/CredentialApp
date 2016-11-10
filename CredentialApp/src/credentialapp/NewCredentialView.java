@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 public class NewCredentialView extends JPanel {
     private NewCredentialModel model;
-    private JLabel titleLabel,descriptionLabel,websiteLabel,passwordLabel,confirmLabel,sqa1Label,sqa2Label,sqa3Label;
+    private JLabel titleLabel,descriptionLabel,websiteLabel,passwordLabel,confirmLabel,sqa1Label,sqa2Label,sqa3Label,outputLabel;
     private JCheckBox emailBox,usernameBox,sq1Box,sq2Box,sq3Box;
     private JTextField titleField,descriptionField,websiteField,emailField,usernameField,sq1Field,sq2Field,sq3Field,sqa1Field,sqa2Field,sqa3Field;
     private JPasswordField passwordField, confirmField;
@@ -31,6 +31,7 @@ public class NewCredentialView extends JPanel {
         websiteLabel = new JLabel("Website:");
         passwordLabel = new JLabel("Password:");
         confirmLabel = new JLabel("Confirm:");
+        outputLabel = new JLabel("");
         titleField = new JTextField(12);
         descriptionField = new JTextField(12);
         websiteField = new JTextField(12);
@@ -41,19 +42,28 @@ public class NewCredentialView extends JPanel {
         sq1Field = new JTextField(12);
         sqa1Field = new JTextField(12);
         sq2Field = new JTextField(12);
+        sq2Field.setEnabled(false);
         sqa2Field = new JTextField(12);
+        sqa2Field.setEnabled(false);
         sq3Field = new JTextField(12);
+        sq3Field.setEnabled(false);
         sqa3Field = new JTextField(12);
+        sqa3Field.setEnabled(false);
         emailBox = new JCheckBox("Email:");
         emailBox.setHorizontalTextPosition(SwingConstants.LEFT);
+        emailBox.setSelected(true);
         usernameBox = new JCheckBox("Username:");
         usernameBox.setHorizontalTextPosition(SwingConstants.LEFT);
+        usernameBox.setSelected(true);
         sq1Box = new JCheckBox("Security Question 1:");
         sq1Box.setHorizontalTextPosition(SwingConstants.LEFT);
+        sq1Box.setSelected(true);
         sq2Box = new JCheckBox("Security Question 2");
         sq2Box.setHorizontalTextPosition(SwingConstants.LEFT);
+        sq2Box.setSelected(false);
         sq3Box = new JCheckBox("Security Question 3");
         sq3Box.setHorizontalTextPosition(SwingConstants.LEFT);
+        sq3Box.setSelected(false);
         sqa1Label = new JLabel("Security Answer 1:");
         sqa2Label = new JLabel("Security Answer 2:");
         sqa3Label = new JLabel("Security Answer 3:");
@@ -159,6 +169,8 @@ public class NewCredentialView extends JPanel {
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 		new Insets(0, 0, 0, 0), 0, 0));
 
+        add(outputLabel, new GridBagConstraints(0, 14, 2, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0,0,5,5),0,0));
     }
 
     public JLabel getTitleLabel() {
@@ -273,7 +285,9 @@ public class NewCredentialView extends JPanel {
         return backButton;
     }
     
-    
+    public JLabel getOutputLabel() {
+        return outputLabel;
+    }
     
     
 }

@@ -18,9 +18,6 @@ import javax.swing.SwingUtilities;
 public class ProfileController {
     private ProfileModel model;
     private ProfileView view; 
-    private final String SERVER="jdbc:derby://localhost:1527/IST311";
-    private final String DB_USERNAME="ist311";
-    private final String DB_PASSWORD="ist311";
     
     public ProfileController(ProfileModel model, ProfileView view) {
         this.model = model;
@@ -29,11 +26,11 @@ public class ProfileController {
         view.getAddCredentialButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NewCredentialModel newCredentialModel = new NewCredentialModel(); //model for the new user
+                NewCredentialModel newCredentialModel = new NewCredentialModel(model); //model for the new user
                 NewCredentialView newCredentialView = new NewCredentialView(newCredentialModel); //view for the new suer
                 NewCredentialController newUserController = new NewCredentialController(newCredentialModel, newCredentialView, (MainView)view.getParent()); //controller for the new user
                 view.getParent().getParent().add(newCredentialView);//add the new user view to parent frame
-                SwingUtilities.getWindowAncestor(view).setSize(320,400);//reset the frame size
+                SwingUtilities.getWindowAncestor(view).setSize(320,415);//reset the frame size
                 view.getParent().setVisible(false); //set the login panel to hidden
             }
         });
@@ -43,8 +40,8 @@ public class ProfileController {
         Connection connection = null;
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            connection = DriverManager.getConnection(SERVER+";user="+DB_USERNAME+";password="+DB_PASSWORD);
-            ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM ACCOUNT WHERE username="+model.getUsername());
+            connection = DriverManager.getConnection(DatabaseConstants.SERVER+";user="+DatabaseConstants.DB_USERNAME+";password="+DatabaseConstants.DB_PASSWORD);
+            ResultSet rs = connection.createStatement().executeQuery("SELECT * FROM ACCOUNT WHERE username='"+model.getUsername()+"'");
             while(rs.next()) {
                 model.setFirstName(rs.getString("FIRST_NAME"));
                 model.setLastName(rs.getString("LAST_NAME"));

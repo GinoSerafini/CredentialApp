@@ -20,7 +20,7 @@ public class MainView extends JTabbedPane {
         super();
         this.model = model;
         
-        profileModel = new ProfileModel();
+        profileModel = new ProfileModel(model.getUsername());
         profileView = new ProfileView(profileModel);
         profileController = new ProfileController(profileModel, profileView);
         

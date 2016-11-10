@@ -13,14 +13,14 @@ public class MainFrame extends JFrame {
     MainController mainCont;
     MainModel mainModel;
     
-    public MainFrame() throws SQLException {
+    public MainFrame(String username) throws SQLException {
         super("Credential Application");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize (250, 300);
         setResizable(false);
         
-        mainModel = new MainModel();
+        mainModel = new MainModel(username);
         mainView = new MainView(mainModel);
         mainCont = new MainController(mainModel, mainView);
         
@@ -30,6 +30,4 @@ public class MainFrame extends JFrame {
     public MainView getMainView() {
         return mainView;
     }
-    
-    
 }
