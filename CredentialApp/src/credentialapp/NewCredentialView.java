@@ -43,12 +43,16 @@ public class NewCredentialView extends JPanel {
         sqa1Field = new JTextField(12);
         sq2Field = new JTextField(12);
         sq2Field.setEnabled(false);
+        sq2Field.setBackground(Color.GRAY);
         sqa2Field = new JTextField(12);
         sqa2Field.setEnabled(false);
+        sqa2Field.setBackground(Color.GRAY);
         sq3Field = new JTextField(12);
         sq3Field.setEnabled(false);
+        sq3Field.setBackground(Color.GRAY);
         sqa3Field = new JTextField(12);
         sqa3Field.setEnabled(false);
+        sqa3Field.setBackground(Color.GRAY);
         emailBox = new JCheckBox("Email:");
         emailBox.setHorizontalTextPosition(SwingConstants.LEFT);
         emailBox.setSelected(true);

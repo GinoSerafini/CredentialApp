@@ -50,8 +50,10 @@ public class NewCredentialController {
             public void actionPerformed(ActionEvent e) {
                 if(view.getEmailBox().isSelected()) {
                     view.getEmailField().setEnabled(true);
+                    view.getEmailField().setBackground(Color.WHITE);
                 }else {
                     view.getEmailField().setEnabled(false);
+                    view.getEmailField().setBackground(Color.GRAY);
                 }
             }
         });
@@ -61,8 +63,10 @@ public class NewCredentialController {
             public void actionPerformed(ActionEvent e) {
                 if(view.getUsernameBox().isSelected()) {
                     view.getUsernameField().setEnabled(true);
+                    view.getUsernameField().setBackground(Color.WHITE);
                 }else {
                     view.getUsernameField().setEnabled(false);
+                    view.getUsernameField().setBackground(Color.GRAY);
                 }
             }
         });
@@ -71,10 +75,14 @@ public class NewCredentialController {
             public void actionPerformed(ActionEvent e) {
                 if(view.getSq1Box().isSelected()) {
                     view.getSq1Field().setEnabled(true);
+                    view.getSq1Field().setBackground(Color.WHITE);
+                    view.getSqa1Field().setBackground(Color.WHITE);
                     view.getSqa1Field().setEnabled(true);
                 }else {
                     view.getSq1Field().setEnabled(false);
                     view.getSqa1Field().setEnabled(false);
+                    view.getSqa1Field().setBackground(Color.GRAY);
+                    view.getSq1Field().setBackground(Color.GRAY);
                 }
             }
         });
@@ -84,9 +92,13 @@ public class NewCredentialController {
                 if(view.getSq2Box().isSelected()) {
                     view.getSq2Field().setEnabled(true);
                     view.getSqa2Field().setEnabled(true);
+                    view.getSqa2Field().setBackground(Color.WHITE);
+                    view.getSq2Field().setBackground(Color.WHITE);
                 }else {
                     view.getSq2Field().setEnabled(false);
                     view.getSqa2Field().setEnabled(false);
+                    view.getSq2Field().setBackground(Color.GRAY);
+                    view.getSqa2Field().setBackground(Color.GRAY);
                 }
             }
         });
@@ -96,9 +108,13 @@ public class NewCredentialController {
                 if(view.getSq3Box().isSelected()) {
                     view.getSq3Field().setEnabled(true);
                     view.getSqa3Field().setEnabled(true);
+                    view.getSqa3Field().setBackground(Color.WHITE);
+                    view.getSq3Field().setBackground(Color.WHITE);
                 }else {
                     view.getSq3Field().setEnabled(false);
                     view.getSqa3Field().setEnabled(false);
+                    view.getSq3Field().setBackground(Color.GRAY);
+                    view.getSqa3Field().setBackground(Color.GRAY);
                 }
             }
         });

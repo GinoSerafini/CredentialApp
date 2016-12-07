@@ -35,10 +35,10 @@ public class MainView extends JTabbedPane {
         credView = new CredentialView(credModel);
         credController = new CredentialController(credModel, credView);
         
-        this.addTab("Profile", profileView);
         this.addTab("Generate Password", passwordGeneratorView);
+        this.addTab("Profile", profileView);
         this.addTab("Credentials", credView);
-        
+        this.setSelectedIndex(1);
     }
 
     public ProfileModel getProfileModel() {
