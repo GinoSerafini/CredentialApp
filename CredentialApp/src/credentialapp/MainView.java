@@ -48,4 +48,8 @@ public class MainView extends JTabbedPane {
     public ProfileController getProfileController() {
         return profileController;
     }
+    
+    public CredentialController getCredentialController() {
+        return credController;
+    }
 }

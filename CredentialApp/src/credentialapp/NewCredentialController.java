@@ -29,7 +29,7 @@ public class NewCredentialController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addCredential();
-                
+                mainView.getCredentialController().createCredentialPanel(mainView.getProfileModel().getCredentialList().size()-1);
             }   
         });
         
@@ -167,7 +167,8 @@ public class NewCredentialController {
             } catch (SQLException ex) {
                 Logger.getLogger(NewCredentialController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            Credential c = new Credential(model.getTitle(),model.getDescription(),model.getWebsite(),model.getEmail(),model.getUsername(),model.getPassword(),model.getSecurityQuestion1(),model.getSecurityQuestion2(),model.getSecurityQuestion3(),model.getSecurityAnswer1(),model.getSecurityAnswer2(),model.getSecurityAnswer3());
+            model.getProfileModel().getCredentialList().add(c);
         }
     }
     
