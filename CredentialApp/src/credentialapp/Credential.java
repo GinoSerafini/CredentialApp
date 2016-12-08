@@ -6,9 +6,10 @@ package credentialapp;
  * @author Group 5
  */
 public class Credential {
-    private String title, description, website, email, username, password, securityQuestion1, securityQuestion2,securityQuestion3,securityAnswer1,securityAnswer2,securityAnswer3;
-
-    public Credential(String title, String description, String website, String email, String username, String password, String securityQuestion1, String securityQuestion2, String securityQuestion3, String securityAnswer1, String securityAnswer2, String securityAnswer3) {
+    private String id, title, description, website, email, username, password, securityQuestion1, securityQuestion2,securityQuestion3,securityAnswer1,securityAnswer2,securityAnswer3;
+    
+    public Credential(String id, String title, String description, String website, String email, String username, String password, String securityQuestion1, String securityQuestion2, String securityQuestion3, String securityAnswer1, String securityAnswer2, String securityAnswer3) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.website = website;
@@ -71,6 +72,12 @@ public class Credential {
         return securityAnswer3;
     }
 
+    public String getID() {
+        return id;
+    }
+
+    
+    
     public void setTitle(String title) {
         this.title = title;
     }
@@ -117,6 +124,10 @@ public class Credential {
 
     public void setSecurityAnswer3(String securityAnswer3) {
         this.securityAnswer3 = securityAnswer3;
+    }
+
+    public void setID(String id) {
+        this.id = id;
     }
     
     

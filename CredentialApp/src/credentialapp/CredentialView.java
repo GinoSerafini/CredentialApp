@@ -13,9 +13,10 @@ public class CredentialView extends JScrollPane {
     
     public CredentialView(CredentialModel model) {
         this.setLayout(new ScrollPaneLayout());
-        
         this.model = model;
         
-        
+    }
+    public ProfileModel getProfileModel() {
+        return model.getProfileModel();
     }
 }

@@ -12,9 +12,11 @@ import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 /**
@@ -37,11 +39,15 @@ public class CredentialController {
                 p.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        boolean optionsValid = false;
+                        Object[] buttons = {"Save", "Cancel"};
                         Component panel = (Component)e.getSource();
                         EditCredentialModel ecModel = new EditCredentialModel(model.getCredentialList().get(Integer.parseInt(panel.getName())));
                         EditCredentialView ecView = new EditCredentialView(ecModel);
-                        EditCredentialController ecCont = new EditCredentialController(ecModel, ecView);
-                        JOptionPane.showConfirmDialog(null,ecView,"View Credential",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
+                        EditCredentialController ecCont = new EditCredentialController(ecModel, ecView, view);
+                        view.getParent().getParent().add(ecView);//add the new user view to parent frame
+                        SwingUtilities.getWindowAncestor(view).setSize(320,415);//reset the frame size
+                        view.getParent().setVisible(false); //set the login panel to hidden
                     }
 
                     @Override
