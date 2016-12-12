@@ -13,6 +13,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -28,60 +35,102 @@ import javax.swing.border.Border;
 public class CredentialController {
     private CredentialModel model;
     private CredentialView view;
-    
-    public CredentialController(CredentialModel model, CredentialView view) {
+    private MainView mainView;
+    public CredentialController(CredentialModel model, CredentialView view,MainView mainView) {
         this.model=model;
         this.view =view;
-
+        this.mainView=mainView;
         if(!model.getCredentialList().isEmpty()) {
-            JPanel mainPanel = new JPanel(new FlowLayout());
-            for(int i=0; i<model.getCredentialList().size();i++) {
-                JPanel p = createCredentialPanel(i);
-                
-                p.setName(""+i);
-                p.addMouseListener(new MouseListener() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        boolean optionsValid = false;
-                        Object[] buttons = {"Save", "Cancel"};
-                        Component panel = (Component)e.getSource();
-                        EditCredentialModel ecModel = new EditCredentialModel(model.getCredentialList().get(Integer.parseInt(panel.getName())));
-                        EditCredentialView ecView = new EditCredentialView(ecModel);
-                        EditCredentialController ecCont = new EditCredentialController(ecModel, ecView, view);
-                        view.getParent().getParent().add(ecView);//add the new user view to parent frame
-                        SwingUtilities.getWindowAncestor(view).setSize(320,415);//reset the frame size
-                        view.getParent().setVisible(false); //set the login panel to hidden
-                    }
-
-                    @Override
-                    public void mousePressed(MouseEvent e) {
-                    }
-
-                    @Override
-                    public void mouseReleased(MouseEvent e) {
-                    }
-
-                    @Override
-                    public void mouseEntered(MouseEvent e) {
-                    }
-
-                    @Override
-                    public void mouseExited(MouseEvent e) {
-                    }
-
-                });
-                p.setBorder(BorderFactory.createLineBorder(Color.black));
-                p.setPreferredSize(new Dimension(220,120));
-                p.setVisible(true);
-                mainPanel.add(p);
-            }
-            view.setViewportView(mainPanel);
+            addCredentials();
+            
         } else {
             JLabel noCredentialsLabel = new JLabel("No credentials found.");
             view.setViewportView(noCredentialsLabel);
         }
     }
     
+    public void addCredentials() {
+        JPanel mainPanel = new JPanel(new FlowLayout());
+        for(int i=0; i<model.getCredentialList().size();i++) {
+            JPanel p = createCredentialPanel(i);
+                
+            p.setName(""+i);
+            p.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    Object[] buttons = {"Save", "Cancel"};
+                    Component panel = (Component)e.getSource();
+                    EditCredentialModel ecModel = new EditCredentialModel(model.getCredentialList().get(Integer.parseInt(panel.getName())));
+                    EditCredentialView ecView = new EditCredentialView(ecModel);
+                    EditCredentialController ecCont = new EditCredentialController(ecModel, ecView, mainView);
+                    view.getParent().getParent().add(ecView);//add the new user view to parent frame
+                    SwingUtilities.getWindowAncestor(view).setSize(320,415);//reset the frame size
+                    view.getParent().setVisible(false); //set the login panel to hidden
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                }
+
+            });
+            p.setBorder(BorderFactory.createLineBorder(Color.black));
+            p.setPreferredSize(new Dimension(220,120));
+            p.setVisible(true);
+            mainPanel.add(p);
+        }
+        view.setViewportView(mainPanel);
+    }
+    
+    private void deleteCredential(int i){
+        Connection conn;
+        try {
+            conn = establishConnection();
+            Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            int rs = stmnt.executeUpdate("DELETE FROM CREDENTIAL WHERE ID="+model.getCredentialList().get(i).getID());
+        } catch (SQLException ex) {
+            Logger.getLogger(CredentialController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        model.getCredentialList().remove(i);
+        view.setVisible(false);
+        mainView.setVisible(true);
+        mainView.getCredentialView().revalidate();
+        mainView.getCredentialView().repaint();
+        mainView.getCredentialController().addCredentials();
+        
+    }
+    
+    
+    protected Connection establishConnection() throws SQLException {
+        Connection connection = null;
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            connection = DriverManager.getConnection(DatabaseConstants.SERVER+";user="+DatabaseConstants.DB_USERNAME+";password="+DatabaseConstants.DB_PASSWORD);
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) { 
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        return connection;
+    }
     public JPanel createCredentialPanel(int i) {
         JPanel p = new JPanel();
         JLabel titleLabel = new JLabel(model.getCredentialList().get(i).getTitle());
@@ -90,8 +139,34 @@ public class CredentialController {
         JLabel passwordLabel = new JLabel("Password: ******");
         JLabel emailLabel;
         JLabel usernameLabel;
+        JLabel deleteLabel = new JLabel("X");
+        deleteLabel.setName(""+i);
         JButton showPasswordButton = new JButton("Show");
-        
+        deleteLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(JOptionPane.showConfirmDialog(null,"Are you sure you would like to delete this credential?\nThis cannot be undone.","Delete Credential",JOptionPane.YES_NO_OPTION)==0) {
+                    deleteCredential(Integer.parseInt(deleteLabel.getName()));
+                } 
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+            
+        });
         showPasswordButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,6 +200,11 @@ public class CredentialController {
 	p.add(titleLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 		new Insets(0, 0, 5, 5), 0, 0));
+        deleteLabel.setFont(new Font("ARIAL", Font.BOLD, 20));
+        p.add(deleteLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+		GridBagConstraints.NORTHEAST, GridBagConstraints.NORTHEAST,
+		new Insets(0, 0, 5, 5), 0, 0));
+        
         descLabel.setFont(new Font("ARIAL", Font.PLAIN,18));
         p.add(descLabel, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH,
@@ -150,6 +230,7 @@ public class CredentialController {
         p.add(emailLabel, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));
+        
         
         return p;
     }

@@ -39,7 +39,7 @@ public class MainView extends JTabbedPane {
        
         credModel = new CredentialModel(profileModel);
         credView = new CredentialView(credModel);
-        credController = new CredentialController(credModel, credView);
+        credController = new CredentialController(credModel, credView,this);
         
         this.addTab("Generate Password", passwordGeneratorView);
         this.addTab("Profile", profileView);
@@ -63,6 +63,8 @@ public class MainView extends JTabbedPane {
         return searchField;
     }
 
-    
+    public CredentialView getCredentialView() {
+        return credView;
+    }
     
 }

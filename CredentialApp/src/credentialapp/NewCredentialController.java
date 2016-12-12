@@ -2,6 +2,7 @@
 package credentialapp;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -143,7 +145,12 @@ public class NewCredentialController {
         model.setUsername(view.getUsernameField().getText());
         model.setPassword(new String(view.getPasswordField().getPassword()));
         model.setConfirmPassword(new String(view.getConfirmField().getPassword()));
-        
+        model.setSecurityQuestion1(view.getSq1Field().getText());
+        model.setSecurityAnswer2(view.getSqa2Field().getText());
+        model.setSecurityQuestion2(view.getSq2Field().getText());
+        model.setSecurityAnswer2(view.getSqa2Field().getText());
+        model.setSecurityQuestion3(view.getSq3Field().getText());
+        model.setSecurityAnswer3(view.getSqa3Field().getText());
         if(model.getTitle().equals("") || model.getDescription().equals("") || 
                 (model.getEmail().equals("")&&view.getEmailBox().isSelected()) || 
                 (model.getUsername().equals("")&&view.getUsernameBox().isSelected()) || 
@@ -192,6 +199,21 @@ public class NewCredentialController {
             view.getOutputLabel().setText("Missing Required Fields");
             
         } else {
+            view.getTitleLabel().setForeground(Color.black);
+            view.getDescriptionLabel().setForeground(Color.black);
+            view.getEmailBox().setForeground(Color.black);
+            view.getUsernameBox().setForeground(Color.black);
+            view.getWebsiteLabel().setForeground(Color.black);
+            view.getPasswordLabel().setForeground(Color.black);
+            view.getConfirmLabel().setForeground(Color.black);
+            view.getSq1Box().setForeground(Color.black);
+            view.getSqa1Label().setForeground(Color.black);
+            view.getSq2Box().setForeground(Color.black);
+            view.getSqa2Label().setForeground(Color.black);
+            view.getSq3Box().setForeground(Color.black);
+            view.getSqa3Label().setForeground(Color.black);
+            view.getOutputLabel().setForeground(Color.green);
+            view.getOutputLabel().setText("Credential has been added!");
             try {
                 Connection conn = establishConnection();
                 Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -210,10 +232,14 @@ public class NewCredentialController {
                         model.getSecurityAnswer2()+"','"+
                         model.getSecurityAnswer3()+"')");
                 ResultSet res = stmnt.executeQuery("SELECT ID FROM CREDENTIAL WHERE TITLE='"+model.getTitle()+"' AND ACCOUNT_ID = (SELECT ACCOUNT.ID FROM ACCOUNT WHERE ACCOUNT.username='"+model.getProfileModel().getUsername()+"')");
-                String id = res.getString("ID");
-                Credential c = new Credential(id,model.getTitle(),model.getDescription(),model.getWebsite(),model.getEmail(),model.getUsername(),model.getPassword(),model.getSecurityQuestion1(),model.getSecurityQuestion2(),model.getSecurityQuestion3(),model.getSecurityAnswer1(),model.getSecurityAnswer2(),model.getSecurityAnswer3());
+                res.next();
+                int id = res.getInt("ID");
+                Credential c = new Credential(id+"",model.getTitle(),model.getDescription(),model.getWebsite(),model.getEmail(),model.getUsername(),model.getPassword(),model.getSecurityQuestion1(),model.getSecurityQuestion2(),model.getSecurityQuestion3(),model.getSecurityAnswer1(),model.getSecurityAnswer2(),model.getSecurityAnswer3());
                 model.getProfileModel().getCredentialList().add(c);
                 conn.close();
+                mainView.getCredentialView().revalidate();
+                mainView.getCredentialView().repaint();
+                mainView.getCredentialController().addCredentials();
                 mainView.setVisible(true);
                 SwingUtilities.getWindowAncestor(view).setSize(250,300);
                 view.setVisible(false);

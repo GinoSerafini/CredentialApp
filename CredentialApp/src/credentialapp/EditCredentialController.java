@@ -21,12 +21,12 @@ import javax.swing.SwingUtilities;
 public class EditCredentialController {
     private EditCredentialModel model;
     private EditCredentialView view;
-    private CredentialView credView;
+    private MainView mainView;
     private CredentialController credCont;
-    public EditCredentialController(EditCredentialModel model, EditCredentialView view, CredentialView credViewm) {
+    public EditCredentialController(EditCredentialModel model, EditCredentialView view, MainView mainView) {
         this.model= model;
         this.view = view;
-        this.credView = credView;
+        this.mainView = mainView;
         this.credCont=credCont;
         view.getSaveButton().addActionListener(new ActionListener() {
             @Override
@@ -40,7 +40,7 @@ public class EditCredentialController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.setVisible(false);
-                credView.getParent().setVisible(true);
+                mainView.setVisible(true);
                 SwingUtilities.getWindowAncestor(view).setSize(250,300);
             }
         
@@ -207,13 +207,10 @@ public class EditCredentialController {
                                                                      "WHERE ID ="+model.getCredential().getID());
                 System.out.println(rs);
                 view.setVisible(false);
-                credView.getParent().setVisible(true);
-                credView.revalidate();
-                credView.repaint();
-                for(int i=0; i<credView.getProfileModel().getCredentialList().size();i++) {
-                    JPanel p = credCont.createCredentialPanel(i);
-                    credView.add(p);
-                }
+                mainView.setVisible(true);
+                mainView.getCredentialView().revalidate();
+                mainView.getCredentialView().repaint();
+                mainView.getCredentialController().addCredentials();
                 SwingUtilities.getWindowAncestor(view).setSize(250,300); 
                 conn.close();
             } catch (SQLException ex) {

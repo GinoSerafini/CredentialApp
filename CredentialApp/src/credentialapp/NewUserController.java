@@ -42,7 +42,7 @@ public class NewUserController {
                 if(e.getSource()==view.getBackButton()) {
                     view.setVisible(false);
                     loginView.setVisible(true);
-                    SwingUtilities.getWindowAncestor(view).setSize(250,300);
+                    SwingUtilities.getWindowAncestor(view).setSize(200,200);
                 }
             
             }
