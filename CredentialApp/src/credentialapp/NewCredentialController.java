@@ -123,6 +123,19 @@ public class NewCredentialController {
     }
     
     private void addCredential() {
+        view.getTitleLabel().setForeground(Color.black);
+        view.getDescriptionLabel().setForeground(Color.black);
+        view.getEmailBox().setForeground(Color.black);
+        view.getUsernameBox().setForeground(Color.black);
+        view.getWebsiteLabel().setForeground(Color.black);
+        view.getPasswordLabel().setForeground(Color.black);
+        view.getConfirmLabel().setForeground(Color.black);
+        view.getSq1Box().setForeground(Color.black);
+        view.getSqa1Label().setForeground(Color.black);
+        view.getSq2Box().setForeground(Color.black);
+        view.getSqa2Label().setForeground(Color.black);
+        view.getSq3Box().setForeground(Color.black);
+        view.getSqa3Label().setForeground(Color.black);
         model.setTitle(view.getTitleField().getText());
         model.setDescription(view.getDescriptionField().getText());
         model.setEmail(view.getEmailField().getText());
@@ -138,7 +151,43 @@ public class NewCredentialController {
                 (model.getSecurityQuestion2().equals("") && view.getSq2Box().isSelected())||
                 (model.getSecurityQuestion3().equals("") && view.getSq3Box().isSelected()) ||
                 (model.getPassword().equals("")) || model.getConfirmPassword().equals("")) {
-            
+            if(model.getTitle().equals("")) {
+                view.getTitleLabel().setForeground(Color.red);
+            } 
+            if(model.getWebsite().equals("")) {
+                view.getWebsiteLabel().setForeground(Color.red);
+            }
+            if(model.getDescription().equals("")) {
+                view.getDescriptionLabel().setForeground(Color.red);
+            }
+            if((model.getEmail().equals("")&&view.getEmailBox().isSelected())) {
+                view.getEmailBox().setForeground(Color.red);
+            } 
+            if((model.getUsername().equals("")&&view.getUsernameBox().isSelected())) {
+                view.getUsernameBox().setForeground(Color.red);
+            } 
+            if(model.getPassword().equals("") || model.getConfirmPassword().equals("")) {
+                view.getPasswordLabel().setForeground(Color.red);
+                view.getConfirmLabel().setForeground(Color.red);
+            }
+            if(model.getSecurityQuestion1().equals("") && view.getSq1Box().isSelected()) {
+                view.getSq1Box().setForeground(Color.red);
+                if(model.getSecurityAnswer1().equals("")) {
+                    view.getSqa1Label().setForeground(Color.red);
+                }
+            } 
+            if(model.getSecurityQuestion2().equals("") && view.getSq2Box().isSelected()) {
+                view.getSq1Box().setForeground(Color.red);
+                if(model.getSecurityAnswer2().equals("")) {
+                    view.getSqa2Label().setForeground(Color.red);
+                }
+            } 
+            if(model.getSecurityQuestion3().equals("") && view.getSq3Box().isSelected()) {
+                view.getSq3Box().setForeground(Color.red);
+                if(model.getSecurityAnswer3().equals("")) {
+                    view.getSqa3Label().setForeground(Color.red);
+                }
+            } 
             view.getOutputLabel().setForeground(Color.red);
             view.getOutputLabel().setText("Missing Required Fields");
             

@@ -31,6 +31,7 @@ public class EditCredentialView extends JPanel {
 
         cancelButton = new JButton("Cancel");
         saveButton = new JButton("Save");
+        outputLabel = new JLabel("");
         
         titleLabel = new JLabel("Title:");
         descriptionLabel = new JLabel("Description:");
@@ -226,6 +227,9 @@ public class EditCredentialView extends JPanel {
         add(saveButton, new GridBagConstraints(1, 13, 1, 1, 0.0, 0.0,
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 		new Insets(0, 0, 0, 0), 0, 0));
+        add(outputLabel, new GridBagConstraints(0, 14, 2, 1, 0.0, 0.0,
+		GridBagConstraints.CENTER, GridBagConstraints.CENTER,
+		new Insets(0, 0, 0, 0), 0, 0));
     }
 
     public JLabel getTitleLabel() {
@@ -339,6 +343,11 @@ public class EditCredentialView extends JPanel {
     public JButton getSaveButton() {
         return saveButton;
     }
+
+    public JLabel getOutputLabel() {
+        return outputLabel;
+    }
+    
     
     
 }

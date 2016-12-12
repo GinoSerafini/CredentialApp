@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
@@ -68,7 +70,7 @@ public class CredentialController {
 
                 });
                 p.setBorder(BorderFactory.createLineBorder(Color.black));
-                p.setPreferredSize(new Dimension(220,110));
+                p.setPreferredSize(new Dimension(220,120));
                 p.setVisible(true);
                 mainPanel.add(p);
             }
@@ -84,8 +86,25 @@ public class CredentialController {
         JLabel titleLabel = new JLabel(model.getCredentialList().get(i).getTitle());
         JLabel descLabel = new JLabel(model.getCredentialList().get(i).getDescription());
         JLabel websiteLabel = new JLabel(model.getCredentialList().get(i).getWebsite());
+        JLabel passwordLabel = new JLabel("Password: ******");
         JLabel emailLabel;
         JLabel usernameLabel;
+        JButton showPasswordButton = new JButton("Show");
+        
+        showPasswordButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(showPasswordButton.getText().equals("Show")) {
+                    showPasswordButton.setText("Hide");
+                    passwordLabel.setText("Password:"+model.getCredentialList().get(i).getPassword());
+                    
+                }else {
+                    showPasswordButton.setText("Show");
+                    passwordLabel.setText("Password: ******");
+                  
+                }
+            }
+        });
         if(!model.getCredentialList().get(i).getEmail().equals(""))
             emailLabel = new JLabel("Email: "+model.getCredentialList().get(i).getEmail());
         else
@@ -94,7 +113,6 @@ public class CredentialController {
             usernameLabel = new JLabel("Username: "+model.getCredentialList().get(i).getUsername());
         else
             usernameLabel = new JLabel("");
-        JLabel passwordLabel = new JLabel("Password: ******");
         
 	p.setLayout(new GridBagLayout());
 	((GridBagLayout)p.getLayout()).columnWidths = new int[] {0, 0, 0, 0};
@@ -123,6 +141,11 @@ public class CredentialController {
         p.add(passwordLabel, new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));
+        
+        p.add(showPasswordButton, new GridBagConstraints(1, 4, 1, 1, 0.0, 0.0,
+            GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+            new Insets(0, 0, 0, 5), 0, 0));
+        
         p.add(emailLabel, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));

@@ -29,9 +29,7 @@ public class EditCredentialController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateCredential();
-                view.setVisible(false);
-                credView.getParent().setVisible(true);
-                SwingUtilities.getWindowAncestor(view).setSize(250,300);
+              
             }
         });
         
@@ -120,7 +118,19 @@ public class EditCredentialController {
     }
     
     private void updateCredential() {
-        String oldCredTitle = model.getCredential().getTitle();
+        view.getTitleLabel().setForeground(Color.black);
+        view.getDescriptionLabel().setForeground(Color.black);
+        view.getEmailBox().setForeground(Color.black);
+        view.getUsernameBox().setForeground(Color.black);
+        view.getWebsiteLabel().setForeground(Color.black);
+        view.getPasswordLabel().setForeground(Color.black);
+        view.getConfirmLabel().setForeground(Color.black);
+        view.getSq1Box().setForeground(Color.black);
+        view.getSqa1Label().setForeground(Color.black);
+        view.getSq2Box().setForeground(Color.black);
+        view.getSqa2Label().setForeground(Color.black);
+        view.getSq3Box().setForeground(Color.black);
+        view.getSqa3Label().setForeground(Color.black);
         model.getCredential().setTitle(view.getTitleField().getText());
         model.getCredential().setDescription(view.getDescriptionField().getText());
         model.getCredential().setEmail(view.getEmailField().getText());
@@ -130,13 +140,50 @@ public class EditCredentialController {
         String confirm = new String(view.getConfirmField().getPassword());
         
         if(model.getCredential().getTitle().equals("") || model.getCredential().getDescription().equals("") || 
-                (model.getCredential().getEmail().equals("")&&view.getEmailBox().isSelected()) || 
+                model.getCredential().getWebsite().equals("") ||
+                (model.getCredential().getEmail().equals("") && view.getEmailBox().isSelected()) || 
                 (model.getCredential().getUsername().equals("")&&view.getUsernameBox().isSelected()) || 
                 (model.getCredential().getSecurityQuestion1().equals("") && view.getSq1Box().isSelected()) || 
                 (model.getCredential().getSecurityQuestion2().equals("") && view.getSq2Box().isSelected())||
                 (model.getCredential().getSecurityQuestion3().equals("") && view.getSq3Box().isSelected()) ||
                 (model.getCredential().getPassword().equals("")) || confirm.equals("")) {
-            
+            if(view.getTitleField().getText().equals("")) {
+                view.getTitleLabel().setForeground(Color.red);
+            } 
+            if(view.getWebsiteField().getText().equals("")) {
+                view.getWebsiteLabel().setForeground(Color.red);
+                
+            }
+            if((view.getEmailField().getText().equals("")&&view.getEmailBox().isSelected())) {
+                view.getEmailBox().setForeground(Color.red);
+            } 
+            if((view.getUsernameField().getText().equals("")&&view.getUsernameBox().isSelected())) {
+                view.getUsernameBox().setForeground(Color.red);
+            } 
+            if(new String(view.getPasswordField().getPassword()).equals("") || new String(view.getConfirmField().getPassword()).equals("")) {
+                view.getPasswordLabel().setForeground(Color.red);
+                view.getConfirmLabel().setForeground(Color.red);
+            }
+            if(view.getSq1Field().getText().equals("") && view.getSq1Box().isSelected()) {
+                view.getSq1Box().setForeground(Color.red);
+                if(view.getSqa1Field().getText().equals("")) {
+                    view.getSqa1Label().setForeground(Color.red);
+                }
+            } 
+            if(view.getSq2Field().getText().equals("") && view.getSq2Box().isSelected()) {
+                view.getSq1Box().setForeground(Color.red);
+                if(view.getSqa2Field().getText().equals("")) {
+                    view.getSqa2Label().setForeground(Color.red);
+                }
+            } 
+            if(view.getSq3Field().getText().equals("") && view.getSq3Box().isSelected()) {
+                view.getSq3Box().setForeground(Color.red);
+                if(view.getSqa3Field().getText().equals("")) {
+                    view.getSqa3Label().setForeground(Color.red);
+                }
+            } 
+            view.getOutputLabel().setForeground(Color.red);
+            view.getOutputLabel().setText("Missing Required Fields");
             
         } else {
             try {
@@ -154,8 +201,11 @@ public class EditCredentialController {
                                                                     "SECURITY_ANSWER_1='"+model.getCredential().getSecurityAnswer1()+"',"+
                                                                     "SECURITY_ANSWER_2='"+model.getCredential().getSecurityAnswer2()+"',"+
                                                                     "SECURITY_ANSWER_3='"+model.getCredential().getSecurityAnswer3()+"'"+
-                                                                     "WHERE ID ='"+model.getCredential().getID()+"'");
-
+                                                                     "WHERE ID ="+model.getCredential().getID());
+                System.out.println(rs);
+                view.setVisible(false);
+                credView.getParent().setVisible(true);
+                SwingUtilities.getWindowAncestor(view).setSize(250,300);
                 conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(NewCredentialController.class.getName()).log(Level.SEVERE, null, ex);
