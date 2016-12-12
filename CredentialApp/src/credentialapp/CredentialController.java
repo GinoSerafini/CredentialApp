@@ -37,6 +37,7 @@ public class CredentialController {
             JPanel mainPanel = new JPanel(new FlowLayout());
             for(int i=0; i<model.getCredentialList().size();i++) {
                 JPanel p = createCredentialPanel(i);
+                
                 p.setName(""+i);
                 p.addMouseListener(new MouseListener() {
                     @Override

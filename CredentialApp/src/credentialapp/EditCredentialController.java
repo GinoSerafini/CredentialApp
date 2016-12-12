@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -21,10 +22,12 @@ public class EditCredentialController {
     private EditCredentialModel model;
     private EditCredentialView view;
     private CredentialView credView;
-    public EditCredentialController(EditCredentialModel model, EditCredentialView view, CredentialView credView) {
+    private CredentialController credCont;
+    public EditCredentialController(EditCredentialModel model, EditCredentialView view, CredentialView credViewm) {
         this.model= model;
         this.view = view;
         this.credView = credView;
+        this.credCont=credCont;
         view.getSaveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -205,7 +208,13 @@ public class EditCredentialController {
                 System.out.println(rs);
                 view.setVisible(false);
                 credView.getParent().setVisible(true);
-                SwingUtilities.getWindowAncestor(view).setSize(250,300);
+                credView.revalidate();
+                credView.repaint();
+                for(int i=0; i<credView.getProfileModel().getCredentialList().size();i++) {
+                    JPanel p = credCont.createCredentialPanel(i);
+                    credView.add(p);
+                }
+                SwingUtilities.getWindowAncestor(view).setSize(250,300); 
                 conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(NewCredentialController.class.getName()).log(Level.SEVERE, null, ex);

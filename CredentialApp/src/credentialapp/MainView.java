@@ -1,6 +1,7 @@
 
 package credentialapp;
 
+import java.awt.FlowLayout;
 import javax.swing.*;
 
 /**
@@ -18,10 +19,15 @@ public class MainView extends JTabbedPane {
     private PasswordGeneratorView passwordGeneratorView;
     private PasswordGeneratorModel passwordGeneratorModel;
     private PasswordGeneratorController passwordGeneratorController;
-    
+    private JTextField searchField;
+    private JLabel searchLabel;
     public MainView(MainModel model) {
         super();
         this.model = model;
+        
+        searchField = new JTextField(10);
+        searchField.setHorizontalAlignment(JTextField.LEFT);
+        searchLabel = new JLabel("Search:");
         
         profileModel = new ProfileModel(model.getUsername());
         profileView = new ProfileView(profileModel);
@@ -52,4 +58,11 @@ public class MainView extends JTabbedPane {
     public CredentialController getCredentialController() {
         return credController;
     }
+
+    public JTextField getSearchField() {
+        return searchField;
+    }
+
+    
+    
 }
