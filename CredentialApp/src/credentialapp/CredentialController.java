@@ -101,8 +101,12 @@ public class CredentialController {
             conn = establishConnection();
             Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             int rs = stmnt.executeUpdate("DELETE FROM CREDENTIAL WHERE ID="+model.getCredentialList().get(i).getID());
+            mainView.getOutputLabel().setForeground(Color.green.darker());
+            mainView.getOutputLabel().setText("Credential was successfully deleted!");
         } catch (SQLException ex) {
             Logger.getLogger(CredentialController.class.getName()).log(Level.SEVERE, null, ex);
+            mainView.getOutputLabel().setForeground(Color.red.darker());
+            mainView.getOutputLabel().setText("An error occured when deleting!");
         }
         model.getCredentialList().remove(i);
         view.setVisible(false);

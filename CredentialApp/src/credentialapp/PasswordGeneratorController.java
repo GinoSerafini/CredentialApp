@@ -15,11 +15,11 @@ import java.awt.event.ActionListener;
 public class PasswordGeneratorController {
     private PasswordGeneratorModel model;
     private PasswordGeneratorView view;
-    
-    public PasswordGeneratorController(PasswordGeneratorModel model, PasswordGeneratorView view) {
+    private MainView mainView;
+    public PasswordGeneratorController(PasswordGeneratorModel model, PasswordGeneratorView view, MainView mainView) {
         this.model = model;
         this.view = view;
-        
+        this.mainView = mainView;
         view.getGeneratePasswordButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -107,7 +107,9 @@ public class PasswordGeneratorController {
         StringSelection str = new StringSelection(model.getGenPassword());
         Clipboard c = Toolkit.getDefaultToolkit().getSystemClipboard();
         c.setContents(str, null);
-
+        
+        mainView.getOutputLabel().setForeground(Color.green.darker());
+        mainView.getOutputLabel().setText("Password has been copied to clipboard!");
     }
     
     private int calcRemainingRandChars(int rem) {

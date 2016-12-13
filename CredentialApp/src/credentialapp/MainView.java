@@ -48,7 +48,7 @@ public class MainView extends JPanel {
         
         passwordGeneratorModel = new PasswordGeneratorModel();
         passwordGeneratorView = new PasswordGeneratorView(passwordGeneratorModel);
-        passwordGeneratorController = new PasswordGeneratorController(passwordGeneratorModel, passwordGeneratorView);
+        passwordGeneratorController = new PasswordGeneratorController(passwordGeneratorModel, passwordGeneratorView, this);
        
         credModel = new CredentialModel(profileModel);
         credView = new CredentialView(credModel);

@@ -243,8 +243,12 @@ public class NewCredentialController {
                 mainView.setVisible(true);
                 SwingUtilities.getWindowAncestor(view).setSize(250,300);
                 view.setVisible(false);
+                mainView.getOutputLabel().setForeground(Color.green.darker());
+                mainView.getOutputLabel().setText("Credential was successfully added!");
             } catch (SQLException ex) {
                 Logger.getLogger(NewCredentialController.class.getName()).log(Level.SEVERE, null, ex);
+                mainView.getOutputLabel().setForeground(Color.red.darker());
+                mainView.getOutputLabel().setText("An error occured!");
             }
         }
     }

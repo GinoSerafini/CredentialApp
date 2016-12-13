@@ -213,8 +213,12 @@ public class EditCredentialController {
                 mainView.getCredentialController().addCredentials(mainView.getProfileModel().getCredentialList());
                 SwingUtilities.getWindowAncestor(view).setSize(250,300); 
                 conn.close();
+                mainView.getOutputLabel().setForeground(Color.green.darker());
+                mainView.getOutputLabel().setText("Changes were successfully made!");
             } catch (SQLException ex) {
                 Logger.getLogger(NewCredentialController.class.getName()).log(Level.SEVERE, null, ex);
+                mainView.getOutputLabel().setForeground(Color.red.darker());
+                mainView.getOutputLabel().setText("An error occured when making changes!");
             }
         }
     }
