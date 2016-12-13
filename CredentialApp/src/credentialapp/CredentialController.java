@@ -148,34 +148,22 @@ public class CredentialController {
         JLabel passwordLabel = new JLabel("Password: ******");
         JLabel emailLabel;
         JLabel usernameLabel;
-        JLabel deleteLabel = new JLabel("X");
-        deleteLabel.setName(""+i);
+        JButton deleteButton = new JButton("X");
+        
+        deleteButton.setSize(new Dimension(5,5));
+        
         JButton showPasswordButton = new JButton("Show");
-        deleteLabel.addMouseListener(new MouseListener() {
+        deleteButton.addActionListener(new ActionListener() {
+            
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 if(JOptionPane.showConfirmDialog(null,"Are you sure you would like to delete this credential?\nThis cannot be undone.","Delete Credential",JOptionPane.YES_NO_OPTION)==0) {
-                    deleteCredential(Integer.parseInt(deleteLabel.getName()));
+                    deleteCredential(Integer.parseInt(deleteButton.getName().charAt(deleteButton.getName().length()-1)+""));
                 } 
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
             }
             
         });
+        
         showPasswordButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -210,9 +198,9 @@ public class CredentialController {
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 		new Insets(0, 0, 5, 5), 0, 0));
         
-        deleteLabel.setFont(new Font("ARIAL", Font.BOLD, 20));
-        p.add(deleteLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-		GridBagConstraints.NORTHEAST, GridBagConstraints.NORTHEAST,
+        deleteButton.setFont(new Font("ARIAL", Font.BOLD, 20));
+        p.add(deleteButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
+		GridBagConstraints.EAST, GridBagConstraints.EAST,
 		new Insets(0, 0, 5, 5), 0, 0));
         
         descLabel.setFont(new Font("ARIAL", Font.PLAIN,18));
@@ -240,8 +228,7 @@ public class CredentialController {
         p.add(emailLabel, new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0,
             GridBagConstraints.CENTER, GridBagConstraints.BOTH,
             new Insets(0, 0, 0, 5), 0, 0));
-        
-        
+        deleteButton.setVisible(true);
         return p;
     }
 

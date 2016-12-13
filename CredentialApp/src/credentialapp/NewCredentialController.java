@@ -27,11 +27,13 @@ public class NewCredentialController {
         this.model = model;
         this.view = view;
         this.mainView=mainView;
+        mainView.getSearchField().setVisible(false);
         view.getSubmitButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addCredential();
                 mainView.getCredentialController().createCredentialPanel(mainView.getProfileModel().getCredentialList(),mainView.getProfileModel().getCredentialList().size()-1);
+                mainView.getSearchField().setVisible(true);
             }   
         });
         
@@ -42,6 +44,7 @@ public class NewCredentialController {
                     view.setVisible(false);
                     mainView.setVisible(true);
                     SwingUtilities.getWindowAncestor(view).setSize(250,300);
+                    mainView.getSearchField().setVisible(true);
                 }
             
             }
@@ -195,8 +198,8 @@ public class NewCredentialController {
                     view.getSqa3Label().setForeground(Color.red);
                 }
             } 
-            view.getOutputLabel().setForeground(Color.red);
-            view.getOutputLabel().setText("Missing Required Fields");
+            mainView.getOutputLabel().setForeground(Color.red);
+            mainView.getOutputLabel().setText("Missing Required Fields");
             
         } else {
             view.getTitleLabel().setForeground(Color.black);
@@ -212,8 +215,8 @@ public class NewCredentialController {
             view.getSqa2Label().setForeground(Color.black);
             view.getSq3Box().setForeground(Color.black);
             view.getSqa3Label().setForeground(Color.black);
-            view.getOutputLabel().setForeground(Color.green);
-            view.getOutputLabel().setText("Credential has been added!");
+            mainView.getOutputLabel().setForeground(Color.green);
+            mainView.getOutputLabel().setText("Credential has been added!");
             try {
                 Connection conn = establishConnection();
                 Statement stmnt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -240,7 +243,7 @@ public class NewCredentialController {
                 mainView.getCredentialView().revalidate();
                 mainView.getCredentialView().repaint();
                 mainView.getCredentialController().addCredentials(model.getProfileModel().getCredentialList());
-                mainView.setVisible(true);
+                mainView.getTabbedPanel().setVisible(true);
                 SwingUtilities.getWindowAncestor(view).setSize(250,300);
                 view.setVisible(false);
                 mainView.getOutputLabel().setForeground(Color.green.darker());

@@ -28,11 +28,13 @@ public class EditCredentialController {
         this.view = view;
         this.mainView = mainView;
         this.credCont=credCont;
+        mainView.getSearchField().setVisible(false);
+        mainView.getOutputLabel().setText("");
         view.getSaveButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateCredential();
-              
+                
             }
         });
         
@@ -40,8 +42,9 @@ public class EditCredentialController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 view.setVisible(false);
-                mainView.setVisible(true);
+                mainView.getTabbedPanel().setVisible(true);
                 SwingUtilities.getWindowAncestor(view).setSize(250,300);
+                mainView.getSearchField().setVisible(true);
             }
         
         });
@@ -207,7 +210,8 @@ public class EditCredentialController {
                                                                      "WHERE ID ="+model.getCredential().getID());
                 System.out.println(rs);
                 view.setVisible(false);
-                mainView.setVisible(true);
+                mainView.getSearchField().setVisible(true);
+                mainView.getTabbedPanel().setVisible(true);
                 mainView.getCredentialView().revalidate();
                 mainView.getCredentialView().repaint();
                 mainView.getCredentialController().addCredentials(mainView.getProfileModel().getCredentialList());

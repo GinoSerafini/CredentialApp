@@ -173,8 +173,6 @@ public class NewCredentialView extends JPanel {
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 		new Insets(0, 0, 0, 0), 0, 0));
 
-        add(outputLabel, new GridBagConstraints(0, 14, 2, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0,0,5,5),0,0));
     }
 
     public JLabel getTitleLabel() {
@@ -287,10 +285,6 @@ public class NewCredentialView extends JPanel {
 
     public JButton getBackButton() {
         return backButton;
-    }
-    
-    public JLabel getOutputLabel() {
-        return outputLabel;
     }
     
     

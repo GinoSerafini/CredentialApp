@@ -28,7 +28,7 @@ public class ProfileController {
             public void actionPerformed(ActionEvent e) {
                 NewCredentialModel newCredentialModel = new NewCredentialModel(model); //model for the new user
                 NewCredentialView newCredentialView = new NewCredentialView(newCredentialModel); //view for the new suer
-                NewCredentialController newUserController = new NewCredentialController(newCredentialModel, newCredentialView, (MainView)view.getParent()); //controller for the new user
+                NewCredentialController newUserController = new NewCredentialController(newCredentialModel, newCredentialView, (MainView)view.getParent().getParent()); //controller for the new user
                 view.getParent().getParent().add(newCredentialView);//add the new user view to parent frame
                 SwingUtilities.getWindowAncestor(view).setSize(320,415);//reset the frame size
                 view.getParent().setVisible(false); //set the login panel to hidden
