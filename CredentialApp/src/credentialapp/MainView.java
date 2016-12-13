@@ -37,6 +37,8 @@ public class MainView extends JPanel {
         this.setLayout(new BorderLayout());
         tabbedPanel = new JTabbedPane();
         searchField = new JTextField(10);
+        PromptSupport.setPrompt("Search", searchField);
+        PromptSupport.setFocusBehavior(FocusBehavior.SHOW_PROMPT, searchField);
         
         
         outputLabel = new JLabel("");
@@ -109,7 +111,5 @@ public class MainView extends JPanel {
     public JTabbedPane getTabbedPanel() {
         return tabbedPanel;
     }
-    
-    
     
 }

@@ -245,6 +245,7 @@ public class CredentialController {
 
         mainView.getCredentialView().revalidate();
         mainView.getCredentialView().repaint();
+        model.getSearchCredentialList().clear();
         if(!searchStr.trim().isEmpty()) {
             for(int i=0; i<model.getCredentialList().size(); i++) {
                 if(model.getCredentialList().get(i).getTitle().contains(searchStr) || model.getCredentialList().get(i).getDescription().contains(searchStr)) {
