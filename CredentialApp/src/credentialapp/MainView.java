@@ -1,14 +1,22 @@
 
 package credentialapp;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+import org.jdesktop.xswingx.PromptSupport;
+import org.jdesktop.xswingx.PromptSupport.FocusBehavior;
 
 /**
  *
  * @author Group 5
  */
-public class MainView extends JTabbedPane {
+public class MainView extends JPanel {
     private MainModel model;
     private ProfileView profileView;
     private ProfileModel profileModel;
@@ -20,15 +28,18 @@ public class MainView extends JTabbedPane {
     private PasswordGeneratorModel passwordGeneratorModel;
     private PasswordGeneratorController passwordGeneratorController;
     private JTextField searchField;
-    private JLabel searchLabel;
+    private JLabel searchLabel, outputLabel;
+    private JTabbedPane tabbedPanel;
+    
     public MainView(MainModel model) {
         super();
         this.model = model;
-        
+        this.setLayout(new BorderLayout());
+        tabbedPanel = new JTabbedPane();
         searchField = new JTextField(10);
-        searchField.setHorizontalAlignment(JTextField.LEFT);
-        searchLabel = new JLabel("Search:");
         
+        
+        outputLabel = new JLabel("");
         profileModel = new ProfileModel(model.getUsername());
         profileView = new ProfileView(profileModel);
         profileController = new ProfileController(profileModel, profileView);
@@ -41,10 +52,34 @@ public class MainView extends JTabbedPane {
         credView = new CredentialView(credModel);
         credController = new CredentialController(credModel, credView,this);
         
-        this.addTab("Generate Password", passwordGeneratorView);
-        this.addTab("Profile", profileView);
-        this.addTab("Credentials", credView);
-        this.setSelectedIndex(1);
+        tabbedPanel.addTab("Generate Password", passwordGeneratorView);
+        tabbedPanel.addTab("Profile", profileView);
+        tabbedPanel.addTab("Credentials", credView);
+        tabbedPanel.setSelectedIndex(1);
+        
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                tabbedPanel.setSelectedIndex(2);
+                credController.searchCredentials(searchField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                tabbedPanel.setSelectedIndex(2);
+                credController.searchCredentials(searchField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        
+        });
+        
+        
+        this.add(searchField,BorderLayout.NORTH);
+        this.add(tabbedPanel,BorderLayout.CENTER);
+        this.add(outputLabel,BorderLayout.SOUTH);
     }
 
     public ProfileModel getProfileModel() {
@@ -66,5 +101,15 @@ public class MainView extends JTabbedPane {
     public CredentialView getCredentialView() {
         return credView;
     }
+
+    public JLabel getOutputLabel() {
+        return outputLabel;
+    }
+
+    public JTabbedPane getTabbedPanel() {
+        return tabbedPanel;
+    }
+    
+    
     
 }

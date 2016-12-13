@@ -11,12 +11,12 @@ import javax.swing.JPanel;
 public class CredentialModel {
     private ProfileModel profileModel;
     private ArrayList<Credential> credentialList;
-    private ArrayList<JPanel> credentialPanelList;
+    private ArrayList<Credential> searchCredentialList;
     
     public CredentialModel(ProfileModel profileModel) {
         this.profileModel = profileModel;
         credentialList = profileModel.getCredentialList();
-        credentialPanelList = new ArrayList();
+        searchCredentialList = new ArrayList();
     }
 
     public ProfileModel getProfileModel() {
@@ -27,8 +27,8 @@ public class CredentialModel {
         return credentialList;
     }
 
-    public ArrayList<JPanel> getCredentialPanelList() {
-        return credentialPanelList;
+    public ArrayList<Credential> getSearchCredentialList() {
+        return searchCredentialList;
     }
     
 }

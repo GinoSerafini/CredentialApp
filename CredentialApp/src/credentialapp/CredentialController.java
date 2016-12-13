@@ -18,6 +18,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
@@ -27,6 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
+import javax.swing.text.Document;
 
 /**
  *
@@ -41,7 +43,7 @@ public class CredentialController {
         this.view =view;
         this.mainView=mainView;
         if(!model.getCredentialList().isEmpty()) {
-            addCredentials();
+            addCredentials(model.getCredentialList());
             
         } else {
             JLabel noCredentialsLabel = new JLabel("No credentials found.");
@@ -49,10 +51,10 @@ public class CredentialController {
         }
     }
     
-    public void addCredentials() {
+    public void addCredentials(ArrayList<Credential> credentialList) {
         JPanel mainPanel = new JPanel(new FlowLayout());
-        for(int i=0; i<model.getCredentialList().size();i++) {
-            JPanel p = createCredentialPanel(i);
+        for(int i=0; i<credentialList.size();i++) {
+            JPanel p = createCredentialPanel(credentialList,i);
                 
             p.setName(""+i);
             p.addMouseListener(new MouseListener() {
@@ -60,7 +62,7 @@ public class CredentialController {
                 public void mouseClicked(MouseEvent e) {
                     Object[] buttons = {"Save", "Cancel"};
                     Component panel = (Component)e.getSource();
-                    EditCredentialModel ecModel = new EditCredentialModel(model.getCredentialList().get(Integer.parseInt(panel.getName())));
+                    EditCredentialModel ecModel = new EditCredentialModel(credentialList.get(Integer.parseInt(panel.getName())));
                     EditCredentialView ecView = new EditCredentialView(ecModel);
                     EditCredentialController ecCont = new EditCredentialController(ecModel, ecView, mainView);
                     view.getParent().getParent().add(ecView);//add the new user view to parent frame
@@ -107,7 +109,7 @@ public class CredentialController {
         mainView.setVisible(true);
         mainView.getCredentialView().revalidate();
         mainView.getCredentialView().repaint();
-        mainView.getCredentialController().addCredentials();
+        addCredentials(model.getCredentialList());
         
     }
     
@@ -131,11 +133,14 @@ public class CredentialController {
         
         return connection;
     }
-    public JPanel createCredentialPanel(int i) {
+    
+    
+    
+    public JPanel createCredentialPanel(ArrayList<Credential> credentialList, int i) {
         JPanel p = new JPanel();
-        JLabel titleLabel = new JLabel(model.getCredentialList().get(i).getTitle());
-        JLabel descLabel = new JLabel(model.getCredentialList().get(i).getDescription());
-        JLabel websiteLabel = new JLabel(model.getCredentialList().get(i).getWebsite());
+        JLabel titleLabel = new JLabel(credentialList.get(i).getTitle());
+        JLabel descLabel = new JLabel(credentialList.get(i).getDescription());
+        JLabel websiteLabel = new JLabel(credentialList.get(i).getWebsite());
         JLabel passwordLabel = new JLabel("Password: ******");
         JLabel emailLabel;
         JLabel usernameLabel;
@@ -172,7 +177,7 @@ public class CredentialController {
             public void actionPerformed(ActionEvent e) {
                 if(showPasswordButton.getText().equals("Show")) {
                     showPasswordButton.setText("Hide");
-                    passwordLabel.setText("Password:"+model.getCredentialList().get(i).getPassword());
+                    passwordLabel.setText("Password:"+credentialList.get(i).getPassword());
                     
                 }else {
                     showPasswordButton.setText("Show");
@@ -181,12 +186,12 @@ public class CredentialController {
                 }
             }
         });
-        if(!model.getCredentialList().get(i).getEmail().equals(""))
-            emailLabel = new JLabel("Email: "+model.getCredentialList().get(i).getEmail());
+        if(!credentialList.get(i).getEmail().equals(""))
+            emailLabel = new JLabel("Email: "+credentialList.get(i).getEmail());
         else
             emailLabel = new JLabel("");
-        if(!model.getCredentialList().get(i).getUsername().equals(""))
-            usernameLabel = new JLabel("Username: "+model.getCredentialList().get(i).getUsername());
+        if(!credentialList.get(i).getUsername().equals(""))
+            usernameLabel = new JLabel("Username: "+credentialList.get(i).getUsername());
         else
             usernameLabel = new JLabel("");
         
@@ -200,6 +205,7 @@ public class CredentialController {
 	p.add(titleLabel, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,
 		GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 		new Insets(0, 0, 5, 5), 0, 0));
+        
         deleteLabel.setFont(new Font("ARIAL", Font.BOLD, 20));
         p.add(deleteLabel, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
 		GridBagConstraints.NORTHEAST, GridBagConstraints.NORTHEAST,
@@ -233,5 +239,23 @@ public class CredentialController {
         
         
         return p;
+    }
+
+    public void searchCredentials(String searchStr) {
+
+        mainView.getCredentialView().revalidate();
+        mainView.getCredentialView().repaint();
+        if(!searchStr.trim().isEmpty()) {
+            for(int i=0; i<model.getCredentialList().size(); i++) {
+                if(model.getCredentialList().get(i).getTitle().contains(searchStr) || model.getCredentialList().get(i).getDescription().contains(searchStr)) {
+                    model.getSearchCredentialList().add(model.getCredentialList().get(i));
+                    
+                }
+            }
+            addCredentials(model.getSearchCredentialList());
+            
+        } else {
+            addCredentials(model.getCredentialList());
+        }
     }
 }

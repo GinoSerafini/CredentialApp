@@ -210,7 +210,7 @@ public class EditCredentialController {
                 mainView.setVisible(true);
                 mainView.getCredentialView().revalidate();
                 mainView.getCredentialView().repaint();
-                mainView.getCredentialController().addCredentials();
+                mainView.getCredentialController().addCredentials(mainView.getProfileModel().getCredentialList());
                 SwingUtilities.getWindowAncestor(view).setSize(250,300); 
                 conn.close();
             } catch (SQLException ex) {

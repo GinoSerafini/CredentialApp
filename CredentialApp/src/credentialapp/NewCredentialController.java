@@ -31,7 +31,7 @@ public class NewCredentialController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 addCredential();
-                mainView.getCredentialController().createCredentialPanel(mainView.getProfileModel().getCredentialList().size()-1);
+                mainView.getCredentialController().createCredentialPanel(mainView.getProfileModel().getCredentialList(),mainView.getProfileModel().getCredentialList().size()-1);
             }   
         });
         
@@ -239,7 +239,7 @@ public class NewCredentialController {
                 conn.close();
                 mainView.getCredentialView().revalidate();
                 mainView.getCredentialView().repaint();
-                mainView.getCredentialController().addCredentials();
+                mainView.getCredentialController().addCredentials(model.getProfileModel().getCredentialList());
                 mainView.setVisible(true);
                 SwingUtilities.getWindowAncestor(view).setSize(250,300);
                 view.setVisible(false);
